@@ -1,0 +1,65 @@
+.adbc-body {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  background-image: url("../utils/bg1.jpg");
+  background-position: center;
+  background-size: cover; }
+
+.adbc--header__div {
+  width: 100%;
+  text-align: center; }
+
+.adbc--header__div h1 {
+  font-size: 9vw;
+  font-family: "Font Authentic", sans-serif;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  color: white;
+  border-bottom: 2px solid white; }
+  @media (min-width: 576px) {
+    .adbc--header__div h1 {
+      font-size: 5vw; } }
+  @media (min-width: 768px) {
+    .adbc--header__div h1 {
+      font-size: 4vw; } }
+
+.adbc--main__div {
+  text-align: center;
+  padding-top: 30px;
+  width: 120px;
+  margin: auto; }
+
+.adbc--main__div h2 {
+  font-family: "Font Authentic", sans-serif;
+  margin-left: 25px;
+  margin-bottom: 5px;
+  color: black; }
+
+.main-link {
+  display: block;
+  font-family: "Font Authentic", sans-serif;
+  padding: 15px;
+  font-size: 30px;
+  color: white;
+  cursor: crosshair;
+  transition: 0.2s; }
+
+.main-link:hover {
+  font-size: 6vw; }
+
+.signout-btn {
+  display: block;
+  font-family: "Font Authentic", sans-serif;
+  padding: 15px;
+  font-size: 30px;
+  color: white;
+  border-top: 2px solid white;
+  cursor: crosshair;
+  transition: 0.6s; }
+
+.signout-btn:hover {
+  border-top: 0px;
+  padding-top: 0px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid white; }

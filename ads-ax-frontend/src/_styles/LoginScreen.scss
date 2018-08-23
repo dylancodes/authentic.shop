@@ -1,0 +1,113 @@
+$dry-authentic-grey: #e9e5dc;
+$light-authentic-grey: #fffcf4;
+$bg-photo: url('../img/tvscreen.jpg');
+$font-stack: 'Work Sans', sans-serif;
+$mid-size: 700;
+$bold-size: 900;
+$cursor-type: crosshair;
+
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 576px;
+// Small tablets (portrait view)
+$screen-md-min: 768px;
+// Tablets and small desktops
+$screen-lg-min: 992px;
+// Large tablets and desktops
+$screen-xl-min: 1200px;
+
+// Small devices
+@mixin sm {
+   @media (min-width: #{$screen-sm-min}) {
+       @content;
+   }
+}
+// Medium devices
+@mixin md {
+   @media (min-width: #{$screen-md-min}) {
+       @content;
+   }
+}
+// Large devices
+@mixin lg {
+   @media (min-width: #{$screen-lg-min}) {
+       @content;
+   }
+}
+// Extra large devices
+@mixin xl {
+   @media (min-width: #{$screen-xl-min}) {
+       @content;
+   }
+}
+// Custom devices
+@mixin rwd($screen) {
+   @media (min-width: $screen+'px') {
+       @content;
+   }
+}
+
+.loginscreen--div {
+  margin: auto;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 35% 0%;
+  @include sm {
+    padding: 15% 0%;
+  }
+  @include lg {
+    padding: 8% 0%;
+  }
+}
+
+.loginscreen--div h1 {
+  font-family: Font Authentic;
+  // font-size: 60px;
+}
+
+.loginscreen--div h2 {
+  font-family: Font Authentic;
+  font-size: 30px;
+  letter-spacing: 1px;
+}
+
+.loginscreen_form {
+  text-align: center;
+}
+
+.input-wrapper {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+.input-element {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 13px 0px 3px 3px;
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 17px;
+  font-family: Font Authentic;
+  letter-spacing: 1px;
+}
+
+.input-submit {
+  float: right;
+  background-color: #e0be00;
+  border: none;
+  padding: 13px 28px;
+  font-size: 14px;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}
