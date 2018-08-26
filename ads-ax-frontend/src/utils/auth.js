@@ -79,3 +79,38 @@ export const newPasswordFn = (newPassword) => {
     });
   });
 }
+
+export const userFn = () => {
+  return this.internals.userPool.getCurrentUser();
+}
+
+/*
+<--- NOTES --->
+Everytime you need temp credentials you need to update the AWS.config.credentials object
+that means you need to get the current user, then getSession from that user, then
+Add the User's Id Token to the Cognito credentials login map.
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: 'YOUR_IDENTITY_POOL_ID',
+    Logins: {
+        'cognito-idp.<region>.amazonaws.com/<YOUR_USER_POOL_ID>': result.getIdToken().getJwtToken()
+    }
+});
+
+Make sure you check to see what the expiration details on the tokens are...
+when the tokens expire, you should call
+AWS.config.credentials.refresh((error) => {
+  if (error) {
+      console.error(error);
+  } else {
+      console.log('Successfully logged!');
+  }
+});
+
+somehow, I think you should be using the temp credentials to access AWS resources,
+use this for reference: https://github.com/jessecascio/jessesnet/blob/master/portfolio/reactjs-aws-cognito/src/view/Secure.js
+
+
+Your resources should grant access to the appropriate federated identity pools,
+you can also set up unathenticated access for guests...
+this will probably be helpful for the cx-frontend-service
+*/

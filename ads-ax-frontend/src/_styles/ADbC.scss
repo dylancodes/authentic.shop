@@ -50,8 +50,10 @@ $screen-xl-min: 1200px;
   width: 100%;
   position: fixed;
   background-image: url('../utils/bg1.jpg');
+  // background-color: black;
   background-position: center;
   background-size: cover;
+  overflow-y: scroll;
 }
 
 .adbc--header__div {
@@ -113,5 +115,61 @@ $screen-xl-min: 1200px;
   padding-top: 0px;
   padding-bottom: 5px;
   border-bottom: 2px solid white;
+}
 
+/* Orders */
+.order-item--container {
+  margin: auto;
+}
+  .order-item--container h5 {
+    margin: 0px;
+    padding: 1px 0px;
+  }
+  .order-item--container h6 {
+    margin: 3px 0px;
+  }
+.order-item--id {
+  text-align: center;
+  border-top: 2px dotted white;
+  padding-top: 13px;
+}
+  .order-item--id:after {
+    content: ""; /* This is necessary for the pseudo element to work. */
+    display: block; /* This will put the pseudo element on its own line. */
+    margin: 0 auto; /* This will center the border. */
+    width: 15%; /* Change this to whatever width you want. */
+    padding-top: 10px; /* This creates some space between the element and the border. */
+    border-bottom: 2px solid white;
+  }
+
+.order-item--left {
+  display: inline-block;
+  width: 35%;
+  height: auto;
+  text-align: center;
+  color: white;
+  margin: 0px;
+}
+.order-item--right {
+  padding-left: 8px;
+  border-left: 1px solid white;
+  display: inline-block;
+  width: 58%;
+  height: auto;
+  text-align: left;
+  color: white;
+}
+
+.order-item--div {
+  margin-bottom: 10px;
+  margin-left: 10vw;
+  @include rwd(500) {
+    margin-left: 100px;
+  }
+  @include md {
+    margin-left: 200px;
+  }
+  @include lg {
+    margin-left: 250px;
+  }
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import DashboardSection from '../_components/DashboardSectionComponent.js';
 import '../_styles/ADbC.css';
 
 class AdminDashboardComponent extends Component {

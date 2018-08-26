@@ -23,6 +23,7 @@ class LoginScreenIndex extends Component {
   }
 
   checkAuth() {
+    // check against AWS session instead ??
     const authStatus = this.props.user.isAuthenticated;
     // console.log(authStatus);
     if(authStatus) {
