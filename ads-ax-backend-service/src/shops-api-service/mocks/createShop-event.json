@@ -1,0 +1,8 @@
+{
+  "body":"{\"shopAccount\":\"2222222Authentic Fashion House\",\"description\":\"A High Class Private Label By Authentic\",\"hq\":\"New York City, NY\",\"contact\":{\"name\":\"Dylan Authentic\",\"title\":\"Owner\",\"phone\":\"770-990-5090\",\"email\":\"dylan@authentic.shop\"},\"attachments\":[\"logo.png\",\"ad-1.png\",\"ad-2.png\"]}",
+   "requestContext": {
+     "identity": {
+       "cognitoIdentityId": "AUTH-1234"
+     }
+   }
+}

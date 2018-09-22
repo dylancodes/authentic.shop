@@ -1,0 +1,11 @@
+{
+  "body":"{\"op\":\"replace\",\"path\":\"hq\",\"value\":\"ATLANTA\"}",
+  "pathParameters": {
+    "shopAccount": "Authentic Fashion House"
+  },
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
+    }
+  }
+}
