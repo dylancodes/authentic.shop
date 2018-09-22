@@ -6,11 +6,11 @@
   "scripts": {
     "test": "jest"
   },
-  "author": "",
-  "license": "MIT",
+  "author": "@DylanAuthentic",
+  "license": "No License",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AnomalyInnovations/serverless-nodejs-starter.git"
+    "url": "https://github.com/dylancodes/authentic.shop/tree/master/ads-ax-backend-service"
   },
   "devDependencies": {
     "aws-sdk": "2.319.0",
