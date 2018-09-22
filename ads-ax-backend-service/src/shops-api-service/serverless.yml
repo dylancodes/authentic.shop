@@ -5,6 +5,7 @@ service: shops-api-service
 plugins:
   - serverless-webpack
   - serverless-offline
+  - serverless-domain-manager
 
 # serverless-webpack configuration
 # Enable auto-packing of external modules
@@ -12,6 +13,12 @@ custom:
   webpack:
     webpackConfig: ../../webpack.config.js
     includeModules: true
+  customDomain:
+    domainName: api.authentic.shop
+    basePath: shops
+    stage: ${self:provider.stage}
+    certificateName: "*.authentic.shop"
+    createRoute53Record: true
 
 provider:
   name: aws
@@ -24,11 +31,7 @@ provider:
   # commit your env.yml.
   #
   #environment: ${file(env.yml):${self:provider.stage}}
-  package:
-    include:
-      - '../../node_modules/**'
-      - '../../package.json'
-      
+
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
