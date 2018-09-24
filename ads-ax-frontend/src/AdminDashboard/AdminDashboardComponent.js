@@ -26,7 +26,7 @@ class AdminDashboardComponent extends Component {
             <Link to="/dashboard/orders" className="main-link">Orders</Link>
             <Link to="" className="main-link">Products</Link>
             <Link to="" className="main-link">Hotspots</Link>
-            <Link to="" className="main-link">Shops</Link>
+            <Link to="/dashboard/shops" className="main-link">Shops</Link>
             <h1 className="signout-btn" onClick={this.exitUser}>Sign Out</h1>
           </div>
         </div>
