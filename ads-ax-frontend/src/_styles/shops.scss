@@ -1,8 +1,9 @@
 $dry-authentic-grey: #e9e5dc;
 $light-authentic-grey: #fffcf4;
 $font-stack:  'Font Authentic', sans-serif;
-$mid-size: 700;
-$bold-size: 900;
+$font-stack2: 'Oswald', sans-serif;
+$mid-size: 400;
+$bold-size: 700;
 $cursor-type: crosshair;
 
 // Small tablets and large smartphones (landscape view)
@@ -45,8 +46,44 @@ $screen-xl-min: 1200px;
    }
 }
 
-
 .shop-item {
   background-color: white;
+  width: auto;
+  text-align: center;
+  padding-top: 1px;
+  padding-bottom: 20px;
+  overflow-x: hidden;
+}
+
+.shop-item h4 {
+  color: black;
+  font-family: $font-stack2;
+  font-weight: 700;
+  margin-top: 12px;
+  margin-bottom: 0px;
+}
+
+.shop-item h5 {
+  color: black;
+  font-family: $font-stack2;
+  font-weight: 400;
+  margin: 10px;
+  margin-bottom: 1px;
+}
+
+.edit-item {
+  font-size: 10px;
+  color: grey;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.item-element {
   width: 100%;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-bottom: 1px solid black;
+  text-align: center;
+  font-weight: 400;
 }
