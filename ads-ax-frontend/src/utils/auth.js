@@ -84,6 +84,27 @@ export const userFn = () => {
   return this.internals.userPool.getCurrentUser();
 }
 
+export const signOutFn = () => {
+  const user = this.internals.userPool.getCurrentUser();
+  user.signOut();
+  this.internals.cognitoUser = null;
+}
+
+export const checkAuthFn = () => {
+  const user = this.internals.userPool.getCurrentUser();
+  if(user != null) {
+    return user.getSession((err, session) => {
+      if(err) {
+        // log error
+        return false;
+      }
+      // log session validity + session.isValid()
+      return true;
+    });
+  }
+  return false;
+}
+
 /*
 <--- NOTES --->
 Everytime you need temp credentials you need to update the AWS.config.credentials object

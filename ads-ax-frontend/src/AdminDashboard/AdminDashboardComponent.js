@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { signOutFn, userFn } from '../utils/auth.js';
 
 import '../_styles/ADbC.css';
 
@@ -10,7 +11,8 @@ class AdminDashboardComponent extends Component {
     this.exitUser = this.exitUser.bind(this);
   }
 
-  exitUser = () => {
+  exitUser = async () => {
+    signOutFn();
     this.props.logoutUser(false);
     this.props.history.push('/');
   }

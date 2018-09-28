@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { checkAuthFn } from '../utils/auth.js';
 import OrdersScreenComponent from './OrdersScreenComponent.js';
 
 class OrdersScreenIndex extends Component {
@@ -37,6 +37,19 @@ class OrdersScreenIndex extends Component {
       brand: 'Wisdom Fashion House',
       productSku: '889CTWM'
     }]
+    this.checkAuth();
+  }
+
+  checkAuth() {
+    // const authStatus = this.props.isAuthenticated;
+    const authStatus = checkAuthFn();
+    console.log("Orders Page");
+    console.log(authStatus);
+    if(authStatus) {
+      // do nothing
+    } else {
+      this.props.history.push('/');
+    }
   }
 
   componentDidMount() {

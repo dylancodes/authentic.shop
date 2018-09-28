@@ -9,7 +9,7 @@ import NewPasswordForm from '../_components/NewPasswordForm.js';
 import LoginScreenComponent from './LoginScreenComponent.js';
 import '../_styles/LoginScreen.css';
 
-import { authFn, newPasswordFn } from '../utils/auth.js';
+import { authFn, newPasswordFn, checkAuthFn } from '../utils/auth.js';
 
 class LoginScreenIndex extends Component {
   constructor(props) {
@@ -24,8 +24,10 @@ class LoginScreenIndex extends Component {
 
   checkAuth() {
     // check against AWS session instead ??
-    const authStatus = this.props.user.isAuthenticated;
-    // console.log(authStatus);
+    // const authStatus = this.props.user.isAuthenticated;
+    const authStatus = checkAuthFn();
+    console.log("Login screen");
+    console.log(authStatus);
     if(authStatus) {
       console.log("sdfsdf");
       this.props.history.push("/dashboard");

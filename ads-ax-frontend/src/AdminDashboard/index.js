@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import{ Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { authenticateUserAction, logoutUserAction } from '../_actions/CurrentUserActions.js';
+import { checkAuthFn } from '../utils/auth.js';
 import ADbC from './AdminDashboardComponent.js';
 
 class AdminDashboardIndex extends Component {
@@ -11,7 +12,11 @@ class AdminDashboardIndex extends Component {
   }
 
   checkAuth() {
-    const authStatus = this.props.isAuthenticated;
+    // const authStatus = this.props.isAuthenticated;
+    // we can set it up to check against session status and auth status ... session status would be aws credentials and auth status would be redux state???
+    const authStatus = checkAuthFn();
+    console.log("Admin Dashboard");
+    console.log(authStatus);
     if(authStatus) {
       // do nothing
     } else {
