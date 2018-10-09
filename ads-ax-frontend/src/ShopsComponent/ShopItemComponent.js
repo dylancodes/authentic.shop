@@ -4,17 +4,19 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 class ShopItemComponent extends React.Component {
   constructor(props) {
     super(props);
+    const shopItem = this.props.item;
+    console.log(shopItem);
 
     this.state = {
-      shopAccount: 'Authentic Fashion House',
+      shopAccount: shopItem.shopAccount,
       displayName: 'AUTHENTIC',
-      hq: 'New York City, NY',
-      description: 'A High-Class Private Label by Authentic',
-      contactEmail: 'dylan@authentic.shop',
-      contactName: 'Dylan Terrell',
-      contactPhone: '770-990-5090',
-      contactTitle: 'Owner',
-      attachments: [],
+      hq: shopItem.hq,
+      description: shopItem.description,
+      contactEmail: shopItem.contact.email,
+      contactName: shopItem.contact.name,
+      contactPhone: shopItem.contact.phone,
+      contactTitle: shopItem.contact.title,
+      attachments: shopItem.attachments,
       displayNameState: true,
       hqState: true,
       descriptionState: true,
@@ -23,7 +25,7 @@ class ShopItemComponent extends React.Component {
       phoneState: true,
       titleState: true,
       attachmentsState: true
-      }
+    }
 
     this.handleChange = this.handleChange.bind(this);
     this._save = this._save.bind(this);
@@ -53,7 +55,7 @@ class ShopItemComponent extends React.Component {
   render() {
     return (
         <div className="shop-item">
-        <h4>Authentic Fashion House</h4>
+        <h4>{this.state.shopAccount}</h4>
           <Row>
             <Col xs={6} sm={6} md={3} lg={3} className="col-element">
               <h5>Display Name <a onClick={() => this._click("displayNameState")} href="#" className="edit-item">Edit</a></h5>

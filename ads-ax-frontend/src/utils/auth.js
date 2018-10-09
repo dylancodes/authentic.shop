@@ -29,6 +29,7 @@ export const authFn = (username, password) => {
     tempUser.authenticateUser(authenticationDetails, {
       onSuccess: (user) => {
         this.internals.cognitoUser = user;
+        AWS.config.update({ region: AWSConfig.cognito.REGION });
         // Configure the credentials provider to use your identity pool
         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
             IdentityPoolId: AWSConfig.cognito.IDENTITY_POOL_ID,

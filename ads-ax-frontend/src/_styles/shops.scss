@@ -53,6 +53,9 @@ $screen-xl-min: 1200px;
   padding-top: 1px;
   padding-bottom: 20px;
   overflow-x: hidden;
+  margin-bottom: 30px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .shop-item h4 {
@@ -85,5 +88,7 @@ $screen-xl-min: 1200px;
   border-right: 0px;
   border-bottom: 1px solid black;
   text-align: center;
+  font-size: 14px;
   font-weight: 400;
+  font-family: $font-stack2;
 }

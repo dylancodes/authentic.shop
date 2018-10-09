@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { signOutFn, userFn } from '../utils/auth.js';
+import AWS from 'aws-sdk';
 
 import '../_styles/ADbC.css';
 
@@ -9,6 +10,9 @@ class AdminDashboardComponent extends Component {
     super(props);
 
     this.exitUser = this.exitUser.bind(this);
+    if(AWS.config.credentials == null) {
+      this.exitUser();
+    }
   }
 
   exitUser = async () => {
