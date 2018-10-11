@@ -5,11 +5,10 @@ class ShopItemComponent extends React.Component {
   constructor(props) {
     super(props);
     const shopItem = this.props.item;
-    console.log(shopItem);
-
+    
     this.state = {
       shopAccount: shopItem.shopAccount,
-      displayName: 'AUTHENTIC',
+      displayName: shopItem.displayName,
       hq: shopItem.hq,
       description: shopItem.description,
       contactEmail: shopItem.contact.email,

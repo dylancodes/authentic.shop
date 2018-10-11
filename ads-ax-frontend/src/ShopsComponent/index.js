@@ -39,7 +39,7 @@ class ShopsContainer extends Component {
     createShop(params)
     .then((result) => {
       this.setState(previousState => ({
-        items: [...previousState.items, result]
+        items: [...previousState.items, result.data]
       }));
     })
     .catch((err) => {
