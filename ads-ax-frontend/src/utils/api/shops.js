@@ -54,28 +54,31 @@ export const getAllShops = async () => {
 
 export const createShop = async (params) => {
   const signedRequest = await refreshCred().then(() => {
+    const data = {
+      shopAccount: params.shopAccount,
+      displayName: params.displayName,
+      hq: params.hq,
+      description: params.description,
+      contact: {
+        email: params.contact.email,
+        name: params.contact.name,
+        phone: params.contact.phone,
+        title: params.contact.title
+      },
+      attachments: params.attachments
+    };
     let request = {
+      headers: {
+        'Content-Type': 'application/json'
+      },
       service: 'execute-api',
       hostname: 'api.authentic.shop',
       region: 'us-east-1',
+      data,
       method: 'POST',
       url: 'https://api.authentic.shop/shops/new-shop',
       path: '/shops/new-shop',
-      body: {
-        shopAccount: params.shopAccount,
-        displayName: params.displayName,
-        hq: params.hq,
-        description: params.description,
-        contact: {
-          email: params.contact.email,
-          name: params.contact.name,
-          phone: params.contact.phone,
-          title: params.contact.title
-        },
-        createdAt: Date.now(),
-        createdBy: userFn().username,
-        attachments: params.attachments
-      }
+      body: JSON.stringify(data)
     }
     let sr = aws4.sign(request,
     {

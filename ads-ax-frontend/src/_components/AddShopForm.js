@@ -24,7 +24,21 @@ class AddShopForm extends Component {
   }
 
   handleSubmit = (event) => {
-    console.log(event);
+    event.preventDefault();
+    const shopParams = {
+      shopAccount: event.target.shopAccount.value,
+      displayName: event.target.displayName.value,
+      hq: event.target.hq.value,
+      description: event.target.description.value,
+      contact: {
+        email: event.target.contactEmail.value,
+        name: event.target.contactName.value,
+        phone: event.target.contactPhone.value,
+        title: event.target.contactTitle.value
+      },
+      attachments: event.target.attachments.value
+    }
+    this.props.createShop(shopParams);
   }
 
   render() {
