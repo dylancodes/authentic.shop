@@ -9,6 +9,7 @@ module.exports.createShop = async (event, context, callback) => {
     TableName: "Shops",
     Item: {
       shopAccount: data.shopAccount,
+      displayName: data.displayName,
       shopId: uuid.v1(),
       description: data.description,
       hq: data.hq,
