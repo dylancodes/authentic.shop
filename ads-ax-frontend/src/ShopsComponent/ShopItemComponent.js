@@ -5,7 +5,7 @@ class ShopItemComponent extends React.Component {
   constructor(props) {
     super(props);
     const shopItem = this.props.item;
-    
+
     this.state = {
       shopAccount: shopItem.shopAccount,
       displayName: shopItem.displayName,
@@ -23,7 +23,8 @@ class ShopItemComponent extends React.Component {
       nameState: true,
       phoneState: true,
       titleState: true,
-      attachmentsState: true
+      attachmentsState: true,
+      changeColor: 'white '
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,12 +40,29 @@ class ShopItemComponent extends React.Component {
     this.setState(prevState => ({ [item]: !prevState[item] }));
   }
 
-  _save(event, item) {
-    if(!this.state[item]) {
+  _save(event, itemState) {
+    if(!this.state[itemState]) {
       // fire patch request method from container prop
-      console.log(event.target.name);
-      console.log(item);
-      this._click(item);
+      const params = {
+        item: event.target.name,
+        value: event.target.value
+      };
+      this.props.changeShop(this.state.shopAccount, params)
+      .then((result) => {
+        console.log(result);
+        this.setState({ changeColor: 'green' });
+        setTimeout(() => {
+          this.setState({ changeColor: 'white' });
+        }, 2000);
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ changeColor: 'red' });
+        setTimeout(() => {
+          this.setState({ changeColor: 'white' });
+        }, 2000);
+      });
+      this._click(itemState);
     }
     else {
       console.log("read only is locked on this element");
@@ -52,8 +70,9 @@ class ShopItemComponent extends React.Component {
   }
 
   render() {
+    const bgColor = this.state.changeColor;
     return (
-        <div className="shop-item">
+        <div className="shop-item" style={{ backgroundColor: bgColor }}>
         <h4>{this.state.shopAccount}</h4>
           <Row>
             <Col xs={6} sm={6} md={3} lg={3} className="col-element">

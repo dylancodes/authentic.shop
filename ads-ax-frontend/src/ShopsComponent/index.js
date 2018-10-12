@@ -3,13 +3,14 @@ import{ Redirect } from 'react-router-dom';
 import { checkAuthFn } from '../utils/auth.js';
 import ShopPage from './ShopsComponent.js';
 import AWS from 'aws-sdk';
-import { getAllShops, createShop } from '../utils/api/shops.js';
+import { getAllShops, createShop, editShop } from '../utils/api/shops.js';
 
 class ShopsContainer extends Component {
   constructor(props) {
     super(props);
     this.checkAuth();
     this.addShop = this.addShop.bind(this);
+    this.changeShop = this.changeShop.bind(this);
     this.state = {
       items: null
     }
@@ -48,10 +49,25 @@ class ShopsContainer extends Component {
     })
   }
 
+  changeShop = (shopAccount, params) => {
+    return new Promise((resolve, reject) => {
+      editShop(shopAccount, params)
+      .then((result) => {
+        console.log(result);
+        resolve(result);
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+        // handle err
+      })
+    });
+  }
+
   render() {
     return (
       <div className="adbc-body">
-        {this.state.items ? <ShopPage items={this.state.items} createShop={this.addShop}/> : <div><h1>Loading...</h1></div>}
+        {this.state.items ? <ShopPage items={this.state.items} createShop={this.addShop} changeShop={this.changeShop} /> : <div><h1>Loading...</h1></div>}
       </div>
     );
   }
