@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+// import ConfirmRemove from '../_components/confirm.js'; {this.state.showConfirmation ? <ConfirmRemove /> : <React.Fragment />}
 
 class ShopItemComponent extends React.Component {
   constructor(props) {
@@ -24,10 +25,12 @@ class ShopItemComponent extends React.Component {
       phoneState: true,
       titleState: true,
       attachmentsState: true,
-      changeColor: 'white '
+      changeColor: 'white ',
+      showConfirmation: false
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
     this._save = this._save.bind(this);
     this._click = this._click.bind(this);
   }
@@ -69,10 +72,16 @@ class ShopItemComponent extends React.Component {
     }
   }
 
+  handleRemove = (e) => {
+    e.preventDefault();
+    this.props.removeShop(this.state.shopAccount)
+  }
+
   render() {
     const bgColor = this.state.changeColor;
     return (
         <div className="shop-item" style={{ backgroundColor: bgColor }}>
+        <a href="" onClick={this.handleRemove}><h6>(x) REMOVE</h6></a>
         <h4>{this.state.shopAccount}</h4>
           <Row>
             <Col xs={6} sm={6} md={3} lg={3} className="col-element">

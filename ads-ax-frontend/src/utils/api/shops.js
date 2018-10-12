@@ -146,3 +146,72 @@ export const editShop = async (shopAccount, params) => {
     return Promise.reject(err);
   });
 }
+
+export const deleteShop = async(shopAccount) => {
+  const signedRequest = await refreshCred().then(() => {
+    let request = {
+      service: 'execute-api',
+      hostname: 'api.authentic.shop',
+      region: 'us-east-1',
+      method: 'DELETE',
+      url: `https://api.authentic.shop/shops/delete/${shopAccount}`,
+      path: `/shops/delete/${shopAccount}`,
+    }
+    let sr = aws4.sign(request,
+    {
+      accessKeyId: `${AWS.config.credentials.accessKeyId}`,
+      secretAccessKey: `${AWS.config.credentials.secretAccessKey}`,
+      sessionToken: `${AWS.config.credentials.sessionToken}`
+    });
+    delete sr.headers['Host'];
+    delete sr.headers['Content-Length'];
+    return sr;
+  }).catch((err) => {
+    console.log(err);
+    return Promise.reject(err);
+  });
+  return await axios(signedRequest).then((result) => {
+    if(!result.status) {
+      console.log(result);
+      Promise.reject(result.status);
+    }
+    return result;
+  })
+  .catch((err) => {
+    console.log(err);
+    return Promise.reject(err);
+  });
+}
+
+export const getShopByName = async (shopAccount) => {
+  const signedRequest = await refreshCred().then(() => {
+    let request = {
+      service: 'execute-api',
+      hostname: 'api.authentic.shop',
+      region: 'us-east-1',
+      method: 'GET',
+      url: `https://api.authentic.shop/shops/${shopAccount}`,
+      path: `/shops/${shopAccount}`
+    }
+    let sr = aws4.sign(request,
+    {
+      accessKeyId: `${AWS.config.credentials.accessKeyId}`,
+      secretAccessKey: `${AWS.config.credentials.secretAccessKey}`,
+      sessionToken: `${AWS.config.credentials.sessionToken}`
+    });
+    delete sr.headers['Host'];
+    delete sr.headers['Content-Length'];
+    return sr;
+  }).catch((err) => {
+    console.log(err);
+    return Promise.reject(err);
+  });
+  let response = await axios(signedRequest).then((result) => {
+    return result;
+  })
+  .catch((err) => {
+    console.log(err);
+    return Promise.reject(err);
+  });
+  return Promise.resolve(response);
+}
