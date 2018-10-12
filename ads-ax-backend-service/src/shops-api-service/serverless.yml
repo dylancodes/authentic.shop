@@ -63,11 +63,15 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
+          request:
+            parameters:
+              paths:
+                shopAccount: true
   createShop:
     handler: createShopHandler.createShop
     events:
       - http:
-          path: /new-shop
+          path: /new
           method: post
           cors: true
           authorizer: aws_iam
@@ -75,15 +79,23 @@ functions:
     handler: editShopHandler.editShop
     events:
       - http:
-          path: /edit-shop/{shopAccount}
+          path: /edit/{shopAccount}
           method: patch
           cors: true
           authorizer: aws_iam
+          request:
+            parameters:
+              paths:
+                shopAccount: true
   deleteShop:
     handler: deleteShopHandler.deleteShop
     events:
       - http:
-          path: /delete-shop/{shopAccount}
+          path: /delete/{shopAccount}
           method: delete
           cors: true
           authorizer: aws_iam
+          request:
+            parameters:
+              paths:
+                shopAccount: true

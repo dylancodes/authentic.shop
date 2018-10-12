@@ -7,11 +7,11 @@ module.exports.editShop = async (event, context, callback) => {
   const params = {
     TableName: 'Shops',
     Key: {
-      shopAccount: event.pathParameters.shopAccount
+      shopAccount: decodeURI(event.pathParameters.shopAccount)
     },
-    UpdateExpression: 'set #path = :value',
+    UpdateExpression: 'set #item = :value',
     ExpressionAttributeNames: {
-        "#path": data.path
+        "#item": data.item
     },
     ExpressionAttributeValues: {
         ":value": data.value
@@ -21,7 +21,8 @@ module.exports.editShop = async (event, context, callback) => {
   try {
     // if item does not exist, the item is created with the given attributes
     await dynamoDBLib.call("update", params);
-    callback(null, success({status: true, resource: `api.authentic.shop/v1/shops/${params.Key.shopAccount}`}));
+    const shopAccount = encodeURI(params.Key.shopAccount);
+    callback(null, success({status: true, resource: `https://api.authentic.shop/shops/${shopAccount}`}));
   } catch (e) {
     // console.log(e);
     callback(null, failure({ status: false, error: "Unable to update item" }));
