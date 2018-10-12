@@ -5,7 +5,7 @@ module.exports.deleteShop = async (event, context, callback) => {
   const params = {
     TableName: "Shops",
     Key: {
-      shopAccount: event.pathParameters.shopAccount
+      shopAccount: decodeURI(event.pathParameters.shopAccount)
     }
   }
 
