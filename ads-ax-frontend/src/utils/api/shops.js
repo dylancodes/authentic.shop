@@ -75,8 +75,8 @@ export const createShop = async (params) => {
       region: 'us-east-1',
       data,
       method: 'POST',
-      url: 'https://api.authentic.shop/shops/new-shop',
-      path: '/shops/new-shop',
+      url: 'https://api.authentic.shop/shops/new',
+      path: '/shops/new',
       body: JSON.stringify(data)
     }
     let sr = aws4.sign(request,
