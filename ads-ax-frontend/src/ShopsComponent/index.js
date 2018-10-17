@@ -3,7 +3,7 @@ import{ Redirect } from 'react-router-dom';
 import { checkAuthFn } from '../utils/auth.js';
 import ShopPage from './ShopsComponent.js';
 import AWS from 'aws-sdk';
-import { getAllShops, createShop, editShop, deleteShop } from '../utils/api/shops.js';
+import { getAllShops, createShop, editShop, deleteShop } from '../utils/api/shopsUtility.js';
 
 class ShopsContainer extends Component {
   constructor(props) {
@@ -105,7 +105,7 @@ class ShopsContainer extends Component {
   render() {
     return (
       <div className="adbc-body">
-        {this.state.items ? <ShopPage items={this.state.items} createShop={this.addShop} changeShop={this.changeShop} removeShop={this.removeShop} /> : <div><h1>Loading...</h1></div>}
+        {this.state.items ? <ShopPage items={this.state.items} addShop={this.addShop} changeShop={this.changeShop} removeShop={this.removeShop} /> : <div><h1>Loading...</h1></div>}
       </div>
     );
   }

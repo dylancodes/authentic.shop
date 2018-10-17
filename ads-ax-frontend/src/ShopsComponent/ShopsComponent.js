@@ -24,7 +24,7 @@ class ShopsComponent extends Component {
       <React.Fragment>
         <Header />
         <a href="#" onClick={this.showForm} styles={{backgroundColor: 'grey', padding: '7px 10px', color: 'white'}}>ADD SHOP</a>
-        {this.state.showForm ? <AddShop createShop={this.props.createShop}/> : <React.Fragment />}
+        {this.state.showForm ? <AddShop addShop={this.props.addShop}/> : <React.Fragment />}
         {this.props.items.map((shopItem, i) => {
           return (<ShopItem key={i} item={shopItem} changeShop={this.props.changeShop} removeShop={this.props.removeShop} />);
         })}
