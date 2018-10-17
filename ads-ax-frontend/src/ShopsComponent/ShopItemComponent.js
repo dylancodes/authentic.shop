@@ -39,11 +39,11 @@ class ShopItemComponent extends React.Component {
     this.setState({[event.target.name]: event.target.value});
   }
 
-  _click(item) {
+  _click = (item) => {
     this.setState(prevState => ({ [item]: !prevState[item] }));
   }
 
-  _save(event, itemState) {
+  _save = (event, itemState) => {
     if(!this.state[itemState]) {
       // fire patch request method from container prop
       const params = {

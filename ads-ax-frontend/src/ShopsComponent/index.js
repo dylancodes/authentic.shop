@@ -45,7 +45,20 @@ class ShopsContainer extends Component {
   }
 
   addShop = (params) => {
-    createShop(params)
+    const data = {
+      shopAccount: params.shopAccount,
+      displayName: params.displayName,
+      hq: params.hq,
+      description: params.description,
+      contact: {
+        email: params.contact.email,
+        name: params.contact.name,
+        phone: params.contact.phone,
+        title: params.contact.title
+      },
+      attachments: params.attachments
+    };
+    createShop(data)
     .then((result) => {
       this.setState(previousState => ({
         items: [...previousState.items, result.data]
@@ -59,7 +72,11 @@ class ShopsContainer extends Component {
 
   changeShop = (shopAccount, params) => {
     return new Promise((resolve, reject) => {
-      editShop(shopAccount, params)
+      const data = {
+        item: params.item,
+        value: params.value
+      };
+      editShop(shopAccount, data)
       .then((result) => {
         console.log(result);
         resolve(result);
@@ -76,7 +93,6 @@ class ShopsContainer extends Component {
     return new Promise((resolve, reject) => {
       deleteShop(shopAccount)
       .then((result) => {
-        console.log(result);
         resolve(result);
       })
       .catch((err) => {
@@ -96,3 +112,11 @@ class ShopsContainer extends Component {
 }
 
 export default ShopsContainer;
+
+
+// TODO
+// () Remove deleted item from state
+// () implement Universal Error Page
+// Connect components to Redux state for Universal Error Page, definitely with status of isError and maybe with the error message so that we can show that on the universal error page
+// Implement this.state.items into Redux state
+// Implement proper error handling -> should display universal error page with support

@@ -18,200 +18,119 @@ const refreshCred = () => {
   });
 }
 
-export const getAllShops = async () => {
-  const signedRequest = await refreshCred().then(() => {
-    let request = {
-      service: 'execute-api',
-      hostname: 'api.authentic.shop',
-      region: 'us-east-1',
-      method: 'GET',
-      url: 'https://api.authentic.shop/shops/all',
-      path: '/shops/all'
+const createRequest = async (requestMethod, requestPath, data = null) => {
+  this.data = data;
+  return await refreshCred().then(() => {
+    if(this.data != null) {
+      this.request = {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        service: 'execute-api',
+        hostname: 'api.authentic.shop',
+        region: 'us-east-1',
+        data: this.data,
+        method: requestMethod,
+        url: `https://api.authentic.shop/shops/${requestPath}`,
+        path: `/shops/${requestPath}`,
+        body: JSON.stringify(this.data)
+      }
+    } else {
+      this.request = {
+        service: 'execute-api',
+        hostname: 'api.authentic.shop',
+        region: 'us-east-1',
+        method: requestMethod,
+        url: `https://api.authentic.shop/shops/${requestPath}`,
+        path: `/shops/${requestPath}`
+      }
     }
-    let sr = aws4.sign(request,
+    this.signedRequest = aws4.sign(this.request,
     {
       accessKeyId: `${AWS.config.credentials.accessKeyId}`,
       secretAccessKey: `${AWS.config.credentials.secretAccessKey}`,
       sessionToken: `${AWS.config.credentials.sessionToken}`
     });
-    delete sr.headers['Host'];
-    delete sr.headers['Content-Length'];
-    return sr;
+    delete this.signedRequest.headers['Host'];
+    delete this.signedRequest.headers['Content-Length'];
+    return this.signedRequest;
   }).catch((err) => {
-    console.log(err);
-    return Promise.reject(err);
-  });
-  let response = await axios(signedRequest).then((result) => {
-    return result;
-  })
-  .catch((err) => {
-    console.log(err);
-    return Promise.reject(err);
-  });
-  return Promise.resolve(response);
-}
-
-export const createShop = async (params) => {
-  const signedRequest = await refreshCred().then(() => {
-    const data = {
-      shopAccount: params.shopAccount,
-      displayName: params.displayName,
-      hq: params.hq,
-      description: params.description,
-      contact: {
-        email: params.contact.email,
-        name: params.contact.name,
-        phone: params.contact.phone,
-        title: params.contact.title
-      },
-      attachments: params.attachments
-    };
-    let request = {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      service: 'execute-api',
-      hostname: 'api.authentic.shop',
-      region: 'us-east-1',
-      data,
-      method: 'POST',
-      url: 'https://api.authentic.shop/shops/new',
-      path: '/shops/new',
-      body: JSON.stringify(data)
-    }
-    let sr = aws4.sign(request,
-    {
-      accessKeyId: `${AWS.config.credentials.accessKeyId}`,
-      secretAccessKey: `${AWS.config.credentials.secretAccessKey}`,
-      sessionToken: `${AWS.config.credentials.sessionToken}`
-    });
-    delete sr.headers['Host'];
-    delete sr.headers['Content-Length'];
-    return sr;
-  }).catch((err) => {
-    console.log(err);
-    return Promise.reject(err);
-  });
-  let response = await axios(signedRequest).then((result) => {
-    return result;
-  })
-  .catch((err) => {
-    console.log(err);
-    return Promise.reject(err);
-  });
-  return Promise.resolve(response);
-}
-
-export const editShop = async (shopAccount, params) => {
-  const signedRequest = await refreshCred().then(() => {
-    const data = {
-      item: params.item,
-      value: params.value
-    };
-    let request = {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      service: 'execute-api',
-      hostname: 'api.authentic.shop',
-      region: 'us-east-1',
-      data,
-      method: 'PATCH',
-      url: `https://api.authentic.shop/shops/edit/${shopAccount}`,
-      path: `/shops/edit/${shopAccount}`,
-      body: JSON.stringify(data)
-    }
-    let sr = aws4.sign(request,
-    {
-      accessKeyId: `${AWS.config.credentials.accessKeyId}`,
-      secretAccessKey: `${AWS.config.credentials.secretAccessKey}`,
-      sessionToken: `${AWS.config.credentials.sessionToken}`
-    });
-    delete sr.headers['Host'];
-    delete sr.headers['Content-Length'];
-    return sr;
-  }).catch((err) => {
-    console.log(err);
-    return Promise.reject(err);
-  });
-  return await axios(signedRequest).then((result) => {
-    if(!result.status) {
-      console.log(result);
-      Promise.reject(result.status);
-    }
-    return result;
-  })
-  .catch((err) => {
-    console.log(err);
-    return Promise.reject(err);
-  });
-}
-
-export const deleteShop = async(shopAccount) => {
-  const signedRequest = await refreshCred().then(() => {
-    let request = {
-      service: 'execute-api',
-      hostname: 'api.authentic.shop',
-      region: 'us-east-1',
-      method: 'DELETE',
-      url: `https://api.authentic.shop/shops/delete/${shopAccount}`,
-      path: `/shops/delete/${shopAccount}`,
-    }
-    let sr = aws4.sign(request,
-    {
-      accessKeyId: `${AWS.config.credentials.accessKeyId}`,
-      secretAccessKey: `${AWS.config.credentials.secretAccessKey}`,
-      sessionToken: `${AWS.config.credentials.sessionToken}`
-    });
-    delete sr.headers['Host'];
-    delete sr.headers['Content-Length'];
-    return sr;
-  }).catch((err) => {
-    console.log(err);
-    return Promise.reject(err);
-  });
-  return await axios(signedRequest).then((result) => {
-    if(!result.status) {
-      console.log(result);
-      Promise.reject(result.status);
-    }
-    return result;
-  })
-  .catch((err) => {
     console.log(err);
     return Promise.reject(err);
   });
 }
 
 export const getShopByName = async (shopAccount) => {
-  const signedRequest = await refreshCred().then(() => {
-    let request = {
-      service: 'execute-api',
-      hostname: 'api.authentic.shop',
-      region: 'us-east-1',
-      method: 'GET',
-      url: `https://api.authentic.shop/shops/${shopAccount}`,
-      path: `/shops/${shopAccount}`
-    }
-    let sr = aws4.sign(request,
-    {
-      accessKeyId: `${AWS.config.credentials.accessKeyId}`,
-      secretAccessKey: `${AWS.config.credentials.secretAccessKey}`,
-      sessionToken: `${AWS.config.credentials.sessionToken}`
-    });
-    delete sr.headers['Host'];
-    delete sr.headers['Content-Length'];
-    return sr;
-  }).catch((err) => {
-    console.log(err);
-    return Promise.reject(err);
-  });
-  let response = await axios(signedRequest).then((result) => {
-    return result;
+  return await createRequest('GET', `/${shopAccount}`)
+  .then((signedRequest) => {
+    return axios(signedRequest);
+  })
+  .then((response) => {
+    return response;
   })
   .catch((err) => {
     console.log(err);
-    return Promise.reject(err);
   });
-  return Promise.resolve(response);
+}
+
+export const getAllShops = async () => {
+  return await createRequest('GET', 'all')
+  .then((signedRequest) => {
+    return axios(signedRequest);
+  })
+  .then((response) => {
+    return Promise.resolve(response);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
+export const createShop = async (data) => {
+  return await createRequest('POST', 'new', data)
+  .then((signedRequest) => {
+    return axios(signedRequest);
+  })
+  .then((response) => {
+    return response;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
+export const editShop = async (shopAccount, data) => {
+  return await createRequest('PATCH', `edit/${shopAccount}`, data)
+  .then((signedRequest) => {
+    return axios(signedRequest);
+  })
+  .then((response) => {
+    if(!response.status) {
+      console.log(response);
+      Promise.reject(response.status);
+      return;
+    }
+    return response;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
+export const deleteShop = async(shopAccount) => {
+  return await createRequest('DELETE', `delete/${shopAccount}`)
+  .then((signedRequest) => {
+    return axios(signedRequest);
+  })
+  .then((response) => {
+    if(!response.status) {
+      console.log(response);
+      Promise.reject(response.status);
+      return;
+    }
+    return response;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 }
