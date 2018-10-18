@@ -9,3 +9,19 @@ TODO:
 () Implement proper error handling -> should display universal error page with support
 () Comment out the application
 (X) Reset/Remove add shop form after submission
+() Remove .js from file imports
+() Universal loading page controlled by redux state
+() Are you sure you want to remove this shopAccount from Authentic?
+() Prop-types
+
+
+Imports follow:
+- Application Imports
+- Node Modules
+
+- Reducers/Actions/etc
+- Utility Functions
+
+- Component Imports
+
+- styles

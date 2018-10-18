@@ -1,6 +1,7 @@
-import AWSConfig from '../aws-config.js';
 import AWS from 'aws-sdk';
 import { CognitoUserPool, AuthenticationDetails, CognitoUser } from 'amazon-cognito-identity-js';
+
+import AWSConfig from '../aws-config.js';
 
 this.internals = {};
 

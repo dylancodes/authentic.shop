@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
 import 'jest-dom/extend-expect';
+
 import Form from './NewPasswordForm';
 
 afterEach(cleanup);

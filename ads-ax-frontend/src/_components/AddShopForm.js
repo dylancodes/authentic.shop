@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import '../_styles/LoginScreen.css';
 import PropTypes from 'prop-types';
+
+import '../_styles/LoginScreen.css';
+
 
 class AddShopForm extends Component {
   constructor(props) {

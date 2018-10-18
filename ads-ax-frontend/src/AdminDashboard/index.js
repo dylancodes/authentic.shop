@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import{ Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import { authenticateUserAction, logoutUserAction } from '../_actions/CurrentUserActions.js';
-import { checkAuthFn } from '../utils/auth.js';
+import { checkAuthFn } from '../utils/authUtility.js';
+
 import ADbC from './AdminDashboardComponent.js';
 
 class AdminDashboardIndex extends Component {

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { checkAuthFn } from '../utils/auth.js';
+
+import { checkAuthFn } from '../utils/authUtility.js';
+
 import OrdersScreenComponent from './OrdersScreenComponent.js';
 
 class OrdersScreenIndex extends Component {

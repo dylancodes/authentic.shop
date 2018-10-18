@@ -6,7 +6,6 @@ class ShopItemComponent extends React.Component {
   constructor(props) {
     super(props);
     const shopItem = this.props.item;
-
     this.state = {
       shopAccount: shopItem.shopAccount,
       displayName: shopItem.displayName,

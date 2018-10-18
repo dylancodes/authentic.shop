@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import Header from '../_components/Header.js';
 import ShopItem from './ShopItemComponent.js';
 import AddShop from '../_components/AddShopForm.js';

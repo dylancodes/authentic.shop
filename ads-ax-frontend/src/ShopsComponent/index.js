@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import{ Redirect } from 'react-router-dom';
-import { checkAuthFn } from '../utils/auth.js';
-import ShopPage from './ShopsComponent.js';
 import AWS from 'aws-sdk';
+
+import { checkAuthFn } from '../utils/authUtility.js';
 import { getAllShops, createShop, editShop, deleteShop } from '../utils/api/shopsUtility.js';
+
+import ShopPage from './ShopsComponent.js';
 
 class ShopsContainer extends Component {
   constructor(props) {
     super(props);
-    this.checkAuth();
     this.state = {
       items: null
     }
-    // add items to redux state, check if items is null, fire request
-    this.getAll();
+    this.checkAuth();
+    this.getAll(); // add items to redux state, check if items is null, fire request
   }
 
-  checkAuth() {
+  checkAuth = () => {
     // const authStatus = this.props.isAuthenticated;
     const authStatus = checkAuthFn();
     console.log("Shops Page");

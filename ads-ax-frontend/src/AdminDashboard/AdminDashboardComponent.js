@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { signOutFn, userFn } from '../utils/auth.js';
 import AWS from 'aws-sdk';
+import { Link } from 'react-router-dom';
+
+import { signOutFn, userFn } from '../utils/authUtility.js';
 
 import '../_styles/ADbC.css';
 

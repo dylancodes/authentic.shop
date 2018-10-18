@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
+
 import { authenticateUserAction, setUserDetailsAction } from '../_actions/CurrentUserActions.js';
 import { setFirstLoginAction } from '../_actions/LoginFormActions.js';
+import { authFn, newPasswordFn, checkAuthFn } from '../utils/authUtility.js';
 
 import NewPasswordForm from '../_components/NewPasswordForm.js';
 import LoginScreenComponent from './LoginScreenComponent.js';
-import '../_styles/LoginScreen.css';
 
-import { authFn, newPasswordFn, checkAuthFn } from '../utils/auth.js';
+import '../_styles/LoginScreen.css';
 
 class LoginScreenIndex extends Component {
   constructor(props) {
