@@ -39,6 +39,7 @@ class AddShopForm extends Component {
       attachments: event.target.attachments.value
     }
     this.props.addShop(shopParams);
+    this.props.showForm();
   }
 
   render() {
