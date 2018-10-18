@@ -28,11 +28,6 @@ class ShopItemComponent extends React.Component {
       changeColor: 'white ',
       showConfirmation: false
     }
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
-    this._save = this._save.bind(this);
-    this._click = this._click.bind(this);
   }
 
   handleChange = event => {
@@ -74,7 +69,7 @@ class ShopItemComponent extends React.Component {
 
   handleRemove = (e) => {
     e.preventDefault();
-    this.props.removeShop(this.state.shopAccount)
+    this.props.removeShop(this.state.shopAccount);
   }
 
   render() {

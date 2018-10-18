@@ -9,14 +9,10 @@ class ShopsContainer extends Component {
   constructor(props) {
     super(props);
     this.checkAuth();
-    // add items to redux state, check if items is null, fire request
-    this.getAll = this.getAll.bind(this);
-    this.addShop = this.addShop.bind(this);
-    this.changeShop = this.changeShop.bind(this);
-    this.removeShop = this.removeShop.bind(this);
     this.state = {
       items: null
     }
+    // add items to redux state, check if items is null, fire request
     this.getAll();
   }
 
@@ -93,7 +89,12 @@ class ShopsContainer extends Component {
     return new Promise((resolve, reject) => {
       deleteShop(shopAccount)
       .then((result) => {
-        resolve(result);
+        this.setState(prevState => ({
+          items: prevState.items.filter(shop => {
+            return shop.shopAccount !== shopAccount
+          })
+        }));
+        resolve(this.state.items);
       })
       .catch((err) => {
         console.log(err);
@@ -115,8 +116,10 @@ export default ShopsContainer;
 
 
 // TODO
-// () Remove deleted item from state
+// (X) Remove deleted item from state
 // () implement Universal Error Page
-// Connect components to Redux state for Universal Error Page, definitely with status of isError and maybe with the error message so that we can show that on the universal error page
-// Implement this.state.items into Redux state
-// Implement proper error handling -> should display universal error page with support
+// () Connect components to Redux state for Universal Error Page, definitely with status of isError and maybe with the error message so that we can show that on the universal error page
+// () Implement this.state.items into Redux state
+// () Implement proper error handling -> should display universal error page with support
+// () Comment out the application
+// () Reset/Remove add shop form after submission
