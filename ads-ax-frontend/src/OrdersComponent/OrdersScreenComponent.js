@@ -6,10 +6,6 @@ import OrderItem from './OrderItemComponent.js';
 import '../_styles/ADbC.css';
 
 class OrdersScreenComponent extends Component {
-  constructor(props) {
-    super(props);
-
-  }
 
   render() {
     return (

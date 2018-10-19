@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { authenticateUserAction, setUserDetailsAction } from '../_actions/CurrentUserActions.js';
+import { authenticateUserAction } from '../_actions/CurrentUserActions.js';
 import { setFirstLoginAction } from '../_actions/LoginFormActions.js';
 import { authFn, newPasswordFn, checkAuthFn } from '../utils/authUtility.js';
 

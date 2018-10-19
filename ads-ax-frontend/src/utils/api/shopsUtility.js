@@ -2,7 +2,7 @@ import axios from 'axios';
 import aws4 from 'aws4';
 import AWS from 'aws-sdk';
 
-import { userFn } from '../authUtility.js';
+// import { userFn } from '../authUtility.js';
 
 const refreshCred = () => {
   return new Promise((resolve, reject) => {

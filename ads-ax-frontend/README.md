@@ -11,8 +11,9 @@ TODO:
 (X) Reset/Remove add shop form after submission
 () Remove .js from file imports
 () Universal loading page controlled by redux state
-() Are you sure you want to remove this shopAccount from Authentic?
+(X) Are you sure you want to remove this shopAccount from Authentic?
 () Prop-types
+(X) button component to replace <a href="#"></a>
 
 
 Imports follow:

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-import '../_styles/LoginScreen.css';
+import '../_styles/shops.css';
 
 
 class AddShopForm extends Component {
@@ -47,20 +47,20 @@ class AddShopForm extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="loginscreen--div">
+        <div className="addshop--div">
           <h2>Create New Shop</h2>
           <form onSubmit={this.handleSubmit}>
-            <div className="input-wrapper">
-              <input className="input-element" type="text" id="shopAccount" name="shopAccount" placeholder="Shop Account" value={this.state.shopAccount} onChange={this.handleChange} required/>
-              <input className="input-element" type="text" id="displayName" name="displayName" placeholder="Display Name" value={this.state.displayName} onChange={this.handleChange} required/>
-              <input className="input-element" type="text" id="description" name="description" placeholder="Description" value={this.state.description} onChange={this.handleChange} required/>
-              <input className="input-element" type="text" id="hq" name="hq" placeholder="HQ" value={this.state.hq} onChange={this.handleChange} required/>
-              <input className="input-element" type="text" id="contactName" name="contactName" placeholder="Contact Name" value={this.state.contactName} onChange={this.handleChange} required/>
-              <input className="input-element" type="text" id="contactEmail" name="contactEmail" placeholder="Contact Email" value={this.state.contactEmail} onChange={this.handleChange} required/>
-              <input className="input-element" type="text" id="contactTitle" name="contactTitle" placeholder="Contact Title" value={this.state.contactTitle} onChange={this.handleChange} required/>
-              <input className="input-element" type="text" id="contactPhone" name="contactPhone" placeholder="Contact Phone" value={this.state.contactPhone} onChange={this.handleChange} required/>
-              <input className="input-element" type="text" id="attachments" name="attachments" placeholder="Attachments" value={this.state.attachments} onChange={this.handleChange} required/>
-              <input className="input-submit" type="submit" name="submit" data-testid="addbtn" value="Create Shop"/>
+            <div className="input-wrapper-shops">
+              <input className="input-element-shops" type="text" id="shopAccount" name="shopAccount" placeholder="Shop Account" value={this.state.shopAccount} onChange={this.handleChange} required/>
+              <input className="input-element-shops" type="text" id="displayName" name="displayName" placeholder="Display Name" value={this.state.displayName} onChange={this.handleChange} required/>
+              <input className="input-element-shops" type="text" id="description" name="description" placeholder="Description" value={this.state.description} onChange={this.handleChange} required/>
+              <input className="input-element-shops" type="text" id="hq" name="hq" placeholder="HQ" value={this.state.hq} onChange={this.handleChange} required/>
+              <input className="input-element-shops" type="text" id="contactName" name="contactName" placeholder="Contact Name" value={this.state.contactName} onChange={this.handleChange} required/>
+              <input className="input-element-shops" type="text" id="contactEmail" name="contactEmail" placeholder="Contact Email" value={this.state.contactEmail} onChange={this.handleChange} required/>
+              <input className="input-element-shops" type="text" id="contactTitle" name="contactTitle" placeholder="Contact Title" value={this.state.contactTitle} onChange={this.handleChange} required/>
+              <input className="input-element-shops" type="text" id="contactPhone" name="contactPhone" placeholder="Contact Phone" value={this.state.contactPhone} onChange={this.handleChange} required/>
+              <input className="input-element-shops" type="text" id="attachments" name="attachments" placeholder="Attachments" value={this.state.attachments} onChange={this.handleChange} required/>
+              <input className="input-submit-shops" type="submit" name="submit" data-testid="addbtn" value="Create Shop"/>
             </div>
           </form>
         </div>
