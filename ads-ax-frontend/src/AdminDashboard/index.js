@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { authenticateUserAction, logoutUserAction } from '../_actions/CurrentUserActions.js';
 import { checkAuthFn } from '../utils/authUtility.js';
@@ -50,5 +51,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const AdminDashboard = connect(mapStateToProps, mapDispatchToProps)(AdminDashboardIndex);
+
+AdminDashboardIndex.propTypes = {
+  authenticateUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+}
 
 export default AdminDashboard;

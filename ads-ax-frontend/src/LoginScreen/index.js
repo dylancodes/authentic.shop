@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { authenticateUserAction } from '../_actions/CurrentUserActions.js';
@@ -103,12 +103,11 @@ const mapDispatchToProps = (dispatch) => ({
 
 const LoginScreenContainer = connect(mapStateToProps, mapDispatchToProps)(LoginScreenIndex);
 
-// LoginScreenContainer.propTypes = {
-//   authenticateUser: PropTypes.func.isRequired,
-//   setFirstLogin: PropTypes.func.isRequired,
-//   form: {
-//     isFirstLogin: PropTypes.bool.isRequired
-//   }
-// }
+LoginScreenIndex.propTypes = {
+  authenticateUser: PropTypes.func.isRequired,
+  setFirstLogin: PropTypes.func.isRequired,
+  form: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
+}
 
 export default LoginScreenContainer;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Header from '../_components/Header.js';
 import ShopItem from './ShopItemComponent.js';
@@ -32,6 +32,13 @@ class ShopsComponent extends Component {
       </React.Fragment>
     );
   }
+}
+
+ShopsComponent.propTypes = {
+  changeShop: PropTypes.func.isRequired,
+  addShop: PropTypes.func.isRequired,
+  removeShop: PropTypes.func.isRequired,
+  items: PropTypes.array.isRequired
 }
 
 export default ShopsComponent;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-flexbox-grid';
+import PropTypes from 'prop-types';
 
 import ConfirmDeletionForm from '../_components/confirmDeletionForm.js';
 import Button from '../_components/Button.js';
@@ -71,7 +72,6 @@ class ShopItemComponent extends React.Component {
   handleRemove = (e) => {
     e.preventDefault();
     this.setState(prevState => ({ showConfirmationForm: !prevState.showConfirmationForm }));
-    // this.props.removeShop(this.state.shopAccount);
   }
 
   render() {
@@ -117,6 +117,12 @@ class ShopItemComponent extends React.Component {
         </div>
     );
   }
+}
+
+ShopItemComponent.propTypes = {
+  changeShop: PropTypes.func.isRequired,
+  removeShop: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired
 }
 
 export default ShopItemComponent;

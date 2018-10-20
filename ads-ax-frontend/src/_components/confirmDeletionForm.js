@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-flexbox-grid';
+import PropTypes from 'prop-types';
 
 import Button from './Button.js';
 
 class confirmDeletionForm extends Component {
-  
+
   confirmDeletion = () => {
     this.props.confirm(this.props.item)
   }
@@ -28,6 +29,12 @@ class confirmDeletionForm extends Component {
       </div>
     );
   }
+}
+
+confirmDeletionForm.propTypes = {
+  cancel: PropTypes.func.isRequired,
+  confirm: PropTypes.func.isRequired,
+  item: PropTypes.string.isRequired
 }
 
 export default confirmDeletionForm;

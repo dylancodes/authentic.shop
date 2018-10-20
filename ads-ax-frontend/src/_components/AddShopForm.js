@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import '../_styles/shops.css';
-
 
 class AddShopForm extends Component {
   constructor(props) {
@@ -69,6 +68,9 @@ class AddShopForm extends Component {
   }
 }
 
-// prop-types
+AddShopForm.propTypes = {
+  addShop: PropTypes.func.isRequired,
+  showForm: PropTypes.func.isRequired
+}
 
 export default AddShopForm;

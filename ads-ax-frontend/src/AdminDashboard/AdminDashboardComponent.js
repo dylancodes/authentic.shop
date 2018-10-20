@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AWS from 'aws-sdk';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { signOutFn } from '../utils/authUtility.js';
 
@@ -9,7 +10,6 @@ import '../_styles/ADbC.css';
 class AdminDashboardComponent extends Component {
   constructor(props) {
     super(props);
-
     this.exitUser = this.exitUser.bind(this);
     if(AWS.config.credentials == null) {
       this.exitUser();
@@ -40,6 +40,10 @@ class AdminDashboardComponent extends Component {
       </React.Fragment>
     );
   }
+}
+
+AdminDashboardComponent.propTypes = {
+  logoutUser: PropTypes.func.isRequired
 }
 
 export default AdminDashboardComponent;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Button = (props) => {
   let p;
@@ -12,6 +13,15 @@ const Button = (props) => {
       {p}
     </React.Fragment>
   )
+}
+
+Button.propTypes = {
+  bgColor: PropTypes.string,
+  color: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  padding: PropTypes.string,
+  text: PropTypes.string,
+  className: PropTypes.string
 }
 
 export default Button;
