@@ -8,6 +8,7 @@ import { authFn, newPasswordFn, checkAuthFn } from '../utils/authUtility.js';
 
 import NewPasswordForm from '../_components/NewPasswordForm.js';
 import LoginScreenComponent from './LoginScreenComponent.js';
+import ErrorBoundary from '../_components/ErrorBoundary.js';
 
 import '../_styles/LoginScreen.css';
 
@@ -70,13 +71,15 @@ class LoginScreenIndex extends Component {
 
   render() {
     return (
-      <React.Fragment>
-      {this.props.form.isFirstLogin ? (
-        <NewPasswordForm errMsg={this.state.errMsg} updatePassword={this.updatePassword} />
-      ) : (
-        <LoginScreenComponent errMsg={this.state.errMsg} onFormSubmission={this.onFormSubmission}/>
-      )}
-      </React.Fragment>
+      <ErrorBoundary>
+        <React.Fragment>
+        {this.props.form.isFirstLogin ? (
+          <NewPasswordForm errMsg={this.state.errMsg} updatePassword={this.updatePassword} />
+        ) : (
+          <LoginScreenComponent errMsg={this.state.errMsg} onFormSubmission={this.onFormSubmission}/>
+        )}
+        </React.Fragment>
+      </ErrorBoundary>
     );
   }
 }

@@ -5,6 +5,7 @@ import { checkAuthFn } from '../utils/authUtility.js';
 import { getAllShops, createShop, editShop, deleteShop } from '../utils/api/shopsUtility.js';
 
 import ShopPage from './ShopsComponent.js';
+import ErrorBoundary from '../_components/ErrorBoundary.js';
 
 class ShopsContainer extends Component {
   constructor(props) {
@@ -105,9 +106,11 @@ class ShopsContainer extends Component {
 
   render() {
     return (
-      <div className="adbc-body">
-        {this.state.items ? <ShopPage items={this.state.items} addShop={this.addShop} changeShop={this.changeShop} removeShop={this.removeShop} /> : <div><h1>Loading...</h1></div>}
-      </div>
+      <ErrorBoundary>
+        <div className="adbc-body">
+          {this.state.items ? <ShopPage items={this.state.items} addShop={this.addShop} changeShop={this.changeShop} removeShop={this.removeShop} /> : <div><h1>Loading...</h1></div>}
+        </div>
+      </ErrorBoundary>
     );
   }
 }

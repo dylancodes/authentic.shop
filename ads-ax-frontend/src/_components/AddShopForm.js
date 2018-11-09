@@ -15,9 +15,10 @@ class AddShopForm extends Component {
       contactEmail: "",
       contactTitle: "",
       contactPhone: "",
-      attachments: []
+      attachments: [],
+      hasError: false,
+      errorMessage: ''
     }
-    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = (event) => {
@@ -26,21 +27,34 @@ class AddShopForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const shopParams = {
-      shopAccount: event.target.shopAccount.value,
-      displayName: event.target.displayName.value,
-      hq: event.target.hq.value,
-      description: event.target.description.value,
-      contact: {
-        email: event.target.contactEmail.value,
-        name: event.target.contactName.value,
-        phone: event.target.contactPhone.value,
-        title: event.target.contactTitle.value
-      },
-      attachments: event.target.attachments.value
+    try {
+      const shopParams = {
+        shopAccount: this.state.shopAccount,
+        displayName: this.state.displayName,
+        hq: this.state.hq,
+        description: this.state.description,
+        contact: {
+          email: this.state.contactEmail,
+          name: this.state.contactName,
+          phone: this.state.contactPhone,
+          title: this.state.contactTitle
+        },
+        attachments: this.state.attachments
+      }
+      this.props.addShop(shopParams);
+      this.props.showForm();
     }
-    this.props.addShop(shopParams);
-    this.props.showForm();
+    catch(err) {
+      // log unsuccessful add
+      // show unsuccessful add message
+      if(!err.type === 'test') {
+        console.log(err);
+      }
+      this.setState({
+        hasError: true,
+        errorMessage: "Fuck, we fucked up. Wasn't able to add the new shop. Try again, or feel free to hit up somebody to come fix this shit!"
+      });
+    }
   }
 
   render() {
@@ -58,8 +72,9 @@ class AddShopForm extends Component {
               <input className="input-element-shops" type="text" id="contactEmail" name="contactEmail" placeholder="Contact Email" value={this.state.contactEmail} onChange={this.handleChange} required/>
               <input className="input-element-shops" type="text" id="contactTitle" name="contactTitle" placeholder="Contact Title" value={this.state.contactTitle} onChange={this.handleChange} required/>
               <input className="input-element-shops" type="text" id="contactPhone" name="contactPhone" placeholder="Contact Phone" value={this.state.contactPhone} onChange={this.handleChange} required/>
-              <input className="input-element-shops" type="text" id="attachments" name="attachments" placeholder="Attachments" value={this.state.attachments} onChange={this.handleChange} required/>
+              <input className="input-element-shops" type="text" id="attachments" name="attachments" placeholder="Attachments" value={this.state.attachments} onChange={this.handleChange} />
               <input className="input-submit-shops" type="submit" name="submit" data-testid="addbtn" value="Create Shop"/>
+              {this.state.hasError ? <h4 data-testid="error-message">{this.state.errorMessage}</h4> : <React.Fragment />}
             </div>
           </form>
         </div>
