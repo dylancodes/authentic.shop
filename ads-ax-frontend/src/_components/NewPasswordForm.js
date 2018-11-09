@@ -30,7 +30,14 @@ class NewPasswordForm extends Component {
         errMsg: "Passwords do not match - Please try again to continue."
       });
     } else {
-      this.props.updatePassword(this.state.pw1);
+      try {
+        this.props.updatePassword(this.state.pw1);
+      }
+      catch(err) {
+        console.log(err);
+        console.log('error in new password form');
+        // log to service
+      }
     }
   }
 

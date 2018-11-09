@@ -18,6 +18,7 @@ class ShopsContainer extends Component {
   }
 
   checkAuth = () => {
+    // try/catch
     // const authStatus = this.props.isAuthenticated;
     const authStatus = checkAuthFn();
     console.log("Shops Page");

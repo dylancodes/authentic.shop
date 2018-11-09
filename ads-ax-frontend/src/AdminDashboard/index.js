@@ -14,6 +14,7 @@ class AdminDashboardIndex extends Component {
   }
 
   checkAuth() {
+    // try/catch
     // const authStatus = this.props.isAuthenticated;
     // we can set it up to check against session status and auth status ... session status would be aws credentials and auth status would be redux state???
     const authStatus = checkAuthFn();

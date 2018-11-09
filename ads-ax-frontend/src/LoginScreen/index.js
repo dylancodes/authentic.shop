@@ -24,6 +24,7 @@ class LoginScreenIndex extends Component {
   }
 
   checkAuth() {
+    // try/catch
     // check against AWS session instead ??
     // const authStatus = this.props.user.isAuthenticated;
     const authStatus = checkAuthFn();

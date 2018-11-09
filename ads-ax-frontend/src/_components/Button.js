@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 const Button = (props) => {
   let p;
   if(props.className) {
-    p = <p onClick={props.onClick} className={props.className}>{props.text}</p>;
+    p = <p data-testid='btn-element' onClick={props.onClick} className={props.className}>{props.text}</p>;
   } else {
-    p = <p onClick={props.onClick} style={{ textAlign: 'center', fontSize: props.fontSize, fontFamily: 'Font Authentic', backgroundColor: props.bgColor, color: props.color, padding: props.padding }}>{props.text}</p>;
+    p = <p data-testid='btn-element' onClick={props.onClick} style={{ textAlign: 'center', fontSize: props.fontSize, fontFamily: 'Font Authentic', backgroundColor: props.bgColor, color: props.color, padding: props.padding }}>{props.text}</p>;
   }
   return (
     <React.Fragment>
@@ -20,7 +20,7 @@ Button.propTypes = {
   color: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   padding: PropTypes.string,
-  text: PropTypes.string,
+  text: PropTypes.string.isRequired,
   className: PropTypes.string
 }
 

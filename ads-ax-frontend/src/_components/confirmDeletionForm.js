@@ -7,17 +7,31 @@ import Button from './Button.js';
 class confirmDeletionForm extends Component {
 
   confirmDeletion = () => {
-    this.props.confirm(this.props.item)
+    try {
+      this.props.confirm(this.props.item);
+    }
+    catch(err) {
+      // log to service
+      console.log(err);
+      console.log("error in confirm deletion");
+    }
   }
 
   cancelDeletion = (e) => {
-    this.props.cancel(e);
+    try {
+      this.props.cancel(e);
+    }
+    catch(err) {
+      // log to service
+      console.log(err);
+      console.log("error in confirm deletion");
+    }
   }
 
   render() {
     return (
       <div style={{ fontSize: '12px', fontFamily: 'Font Authentic', height:'100%', width: '100%', backgroundColor: 'white', color: 'black'}}>
-        <h3>Are you sure you want to delete {this.props.item}?</h3>
+        <h3 data-testid='display-message'>Are you sure you want to delete {this.props.item}?</h3>
         <Row>
           <Col xs={6} sm={6} md={3} lg={3} className="col-element">
             <Button text={'Delete'} onClick={this.confirmDeletion} />

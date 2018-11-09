@@ -26,6 +26,7 @@ class LoginScreenComponent extends Component {
   validateForm = event => {
     event.preventDefault();
     if(this.state.username.length > 0 && this.state.password.length > 0) {
+      // try/catch
       this.props.onFormSubmission(this.state.username, this.state.password);
     }
     else {

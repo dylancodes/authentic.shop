@@ -8,12 +8,13 @@ TODO:
 (X) Prop-types
 (X) button component to replace <a href="#"></a>
 (X) Implement Error Boundary
-() Implement try/catch in event handlers, and/or utility functions or use explicit promises
-() (BACKBURNER) Implement all of ShopsComponent state into context api?
-() Comment out the application
-() ReadMe.md
-() (BACKBURNER) Remove .js from file imports
+(X) Implement try/catch in event handlers, and/or utility functions or use explicit promises
 () Universal loading page controlled by redux state
+() (BACKBURNER) Implement all of ShopsComponent state into context api?
+() (BACKBURNER) Comment out the application
+() (BACKBURNER) eadMe.md
+() (BACKBURNER) Remove .js from file imports
+
 
 
 
