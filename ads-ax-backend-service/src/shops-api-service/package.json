@@ -22,6 +22,7 @@
     "babel-preset-stage-3": "^6.24.1",
     "jest": "^21.2.1",
     "serverless-domain-manager": "2.6.5",
+    "serverless-iam-roles-per-function": "1.0.4",
     "serverless-offline": "^3.25.6",
     "serverless-webpack": "^5.1.0",
     "webpack": "^4.16.2",
@@ -29,6 +30,11 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "busboy": "0.2.14",
+    "file-type": "10.5.0",
+    "formidable": "1.2.1",
+    "lodash": "4.17.11",
+    "multiparty": "4.2.1",
     "source-map-support": "^0.4.18",
     "uuid": "3.3.2"
   }

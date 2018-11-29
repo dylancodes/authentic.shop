@@ -6,6 +6,7 @@ plugins:
   - serverless-webpack
   - serverless-offline
   - serverless-domain-manager
+  - serverless-iam-roles-per-function
 
 # serverless-webpack configuration
 # Enable auto-packing of external modules
@@ -99,3 +100,14 @@ functions:
             parameters:
               paths:
                 shopAccount: true
+  uploadAttachment:
+    handler: uploadAttachmentHandler.uploadAttachment
+    events:
+      - http:
+          path: /upload
+          method: post
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - s3:PutObject
+        Resource: "arn:aws:s3:::ads-ax-service.shops--zine/*"
