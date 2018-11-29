@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
+// implement snapshot testing
+
 const Header = () => {
   return (
     <div className="adbc--header__div">

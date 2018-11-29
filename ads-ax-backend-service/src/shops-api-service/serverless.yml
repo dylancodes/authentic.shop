@@ -106,6 +106,8 @@ functions:
       - http:
           path: /upload
           method: post
+          cors: true
+          authorizer: aws_iam
     iamRoleStatements:
       - Effect: "Allow"
         Action:
