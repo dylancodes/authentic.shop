@@ -104,10 +104,15 @@ functions:
     handler: uploadAttachmentHandler.uploadAttachment
     events:
       - http:
-          path: /upload
+          path: /upload/{shopAccount}
           method: post
           cors: true
           authorizer: aws_iam
+          request:
+            parameters:
+              paths:
+                shopAccount: true
+    iamRoleStatementsInherit: true
     iamRoleStatements:
       - Effect: "Allow"
         Action:
