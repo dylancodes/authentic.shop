@@ -19,7 +19,7 @@ module.exports.createShop = async (event, context, callback) => {
         phone: data.contact.phone,
         email: data.contact.email
       },
-      attachments: data.attachments,
+      s3ImageCollection: [],
       createdBy: event.requestContext.identity.cognitoIdentityId,
       createdAt: Date.now()
     }
