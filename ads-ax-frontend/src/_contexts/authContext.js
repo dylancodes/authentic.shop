@@ -14,6 +14,7 @@ class AuthProvider extends React.Component {
   }
 
   toggleAuth = () => {
+    // more layers of security ... check AWS credentials? refresh AWS credentials?
     this.setState(prevState => ({
       isAuthenticated: !prevState.isAuthenticated
     }));

@@ -12,6 +12,28 @@ import './_styles/App.css';
 import ErrorBoundary from './_components/ErrorBoundary.js';
 
 import { AuthProvider } from './_contexts/authContext.js';
+import { AuthConsumer } from './_contexts/authContext.js';
+
+const withAuthConsumer = (C) => {
+  return ({children, ...props}) => {
+    return (
+      <AuthConsumer>
+        {obj => {
+          return (
+            <C {...props} authCtx={obj}>
+              {children}
+            </C>
+          )
+        }}
+      </AuthConsumer>
+    )
+  }
+}
+
+const LoginScreen_Auth = withAuthConsumer(LoginScreen);
+const AdminDashboard_Auth = withAuthConsumer(AdminDashboard);
+const OrdersComponent_Auth = withAuthConsumer(OrdersComponent);
+const ShopsComponent_Auth = withAuthConsumer(ShopsComponent);
 
 class App extends Component {
   render() {
@@ -22,10 +44,10 @@ class App extends Component {
             <AuthProvider>
               <Router>
                 <Switch>
-                  <Route exact path="/" component={LoginScreen} />
-                  <Route exact path="/dashboard" component={AdminDashboard} />
-                  <Route exact path="/dashboard/orders" component={OrdersComponent} />
-                  <Route exact path="/dashboard/shops" component={ShopsComponent} />
+                  <Route exact path="/" component={LoginScreen_Auth} />
+                  <Route exact path="/dashboard" component={AdminDashboard_Auth} />
+                  <Route exact path="/dashboard/orders" component={OrdersComponent_Auth} />
+                  <Route exact path="/dashboard/shops" component={ShopsComponent_Auth} />
                   <Route component={NotFound404} />
                 </Switch>
               </Router>

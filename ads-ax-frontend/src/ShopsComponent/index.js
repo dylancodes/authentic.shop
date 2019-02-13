@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import AWS from 'aws-sdk';
 
-import { checkAuthFn } from '../utils/authUtility.js';
 import { getAllShops, createShop, editShop, deleteShop, uploadAttachment } from '../utils/api/shopsUtility.js';
 
 import ShopPage from './ShopsComponent.js';
 import ErrorBoundary from '../_components/ErrorBoundary.js';
-
-import { AuthConsumer } from '../_contexts/authContext.js';
 
 export const ImageCollectionCtx = React.createContext();
 
@@ -32,16 +29,14 @@ class ShopsContainer extends Component {
       s3ImageCollection: []
     }
     this.checkAuth();
-    this.getAll();
   }
 
   checkAuth = () => {
-    // try/catch
-    const authStatus = checkAuthFn();
-    if(authStatus && AWS.config.credentials != null) {
-      // do nothing
-    } else {
+    if(!this.props.authCtx.isAuthenticated) {
       this.props.history.push('/');
+    }
+    else {
+      this.getAll();
     }
   }
 

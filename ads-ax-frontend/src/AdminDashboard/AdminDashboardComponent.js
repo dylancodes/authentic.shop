@@ -10,7 +10,6 @@ import '../_styles/ADbC.css';
 class AdminDashboardComponent extends Component {
   constructor(props) {
     super(props);
-    this.exitUser = this.exitUser.bind(this);
     if(AWS.config.credentials == null) {
       this.exitUser();
     }
@@ -18,8 +17,8 @@ class AdminDashboardComponent extends Component {
 
   exitUser = async () => {
     try {
-      signOutFn();
-      this.props.logoutUser(false);
+      await signOutFn();
+      this.props.logoutUser();
       this.props.history.push('/');
     }
     catch(err) {
@@ -39,8 +38,8 @@ class AdminDashboardComponent extends Component {
         <div className="adbc--main__div">
           <div style={{textAlign:'left'}}>
             <Link to="/dashboard/orders" className="main-link">Orders</Link>
-            <Link to="" className="main-link">Products</Link>
-            <Link to="" className="main-link">Hotspots</Link>
+            <Link to="/dashboard" className="main-link">Products</Link>
+            <Link to="/dashboard" className="main-link">Hotspots</Link>
             <Link to="/dashboard/shops" className="main-link">Shops</Link>
             <h1 className="signout-btn" onClick={this.exitUser}>Sign Out</h1>
           </div>

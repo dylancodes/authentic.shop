@@ -63,6 +63,14 @@ export const newPasswordFn = (newPassword) => {
     const userAttr = this.internals.userAttr;
     this.internals.authenticatedUserInstance.completeNewPasswordChallenge(newPassword, userAttr, {
       onSuccess: (user) => {
+        AWS.config.update({ region: AWSConfig.cognito.REGION });
+        // Configure the credentials provider to use your identity pool
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: AWSConfig.cognito.IDENTITY_POOL_ID,
+            Logins: {
+                'cognito-idp.us-east-1.amazonaws.com/us-east-1_C0HNsNxHX': user.idToken.jwtToken
+            }
+        });
         resolve({status: true });
       },
       onFailure: (err) => {
