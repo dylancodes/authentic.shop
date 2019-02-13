@@ -10,6 +10,8 @@ import NewPasswordForm from '../_components/NewPasswordForm.js';
 import LoginScreenComponent from './LoginScreenComponent.js';
 import ErrorBoundary from '../_components/ErrorBoundary.js';
 
+import { AuthConsumer } from '../_contexts/authContext.js';
+
 import '../_styles/LoginScreen.css';
 
 class LoginScreenIndex extends Component {
@@ -18,12 +20,20 @@ class LoginScreenIndex extends Component {
     this.state = {
       errMsg: null
     }
-    this.checkAuth();
+
     this.onFormSubmission = this.onFormSubmission.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
   }
 
   checkAuth() {
+
+    // console.log(this.state.ctx);
+    // if(this.state.ctx.isAuthenticated) {
+    //   this.props.history.push("/dashboard");
+    // } else {
+    //   // sign in
+    //   console.log("sign in");
+    // }
     // try/catch
     // check against AWS session instead ??
     // const authStatus = this.props.user.isAuthenticated;
@@ -38,36 +48,37 @@ class LoginScreenIndex extends Component {
     }
   }
 
-  onFormSubmission = (username, password) => {
-    authFn(username, password)
-    .then((result) => {
+  onFormSubmission = async (username, password) => {
+    try {
+      const result = await authFn(username, password);
       this.setState({ errMsg: null });
       if(result.NEW_PASSWORD_REQUIRED) {
-        this.props.setFirstLogin(true);
-        console.log("new password required");
+         this.props.setFirstLogin(true); // re-factor this into the authProvider/Consumer
       }
       else {
-        this.props.authenticateUser(true, result.COGNITO_USER);
+        // this is where I should update the authProvider/Consumer
         this.props.history.push('/dashboard');
       }
-    })
-    .catch((errorMsg) => {
+    }
+    catch(errorMsg) {
+      // log to service
       this.setState({errMsg: errorMsg});
       console.log("error logging in");
-    });
+    }
   }
 
-  updatePassword = (newPassword) => {
-    newPasswordFn(newPassword)
-    .then((result) => {
+  updatePassword = async (newPassword) => {
+    try {
+      await newPasswordFn(newPassword);
       this.setState({ errMsg: null });
-      this.props.authenticateUser(true, result.COGNITO_USER);
+      // update authProvider/Consumer
       this.props.history.push('/dashboard')
-    })
-    .catch((errorMsg) => {
+    }
+    catch(errorMsg) {
+      // log to service
       this.setState({errMsg: errorMsg});
       console.log("error changing password");
-    });
+    }
   }
 
   render() {
@@ -104,6 +115,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setFirstLoginAction(isFirstLogin));
   }
 });
+
 
 const LoginScreenContainer = connect(mapStateToProps, mapDispatchToProps)(LoginScreenIndex);
 

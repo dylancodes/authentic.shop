@@ -9,24 +9,30 @@ import OrdersComponent from './OrdersComponent';
 import ShopsComponent from './ShopsComponent';
 import NotFound404 from './_components/NotFound404.js';
 import './_styles/App.css';
+import ErrorBoundary from './_components/ErrorBoundary.js';
+
+import { AuthProvider } from './_contexts/authContext.js';
 
 class App extends Component {
-
   render() {
     return (
-      <div className="App">
-        <Provider store={store}>
-          <Router>
-            <Switch>
-              <Route exact path="/" component={LoginScreen} />
-              <Route exact path="/dashboard" component={AdminDashboard} />
-              <Route exact path="/dashboard/orders" component={OrdersComponent} />
-              <Route exact path="/dashboard/shops" component={ShopsComponent} />
-              <Route component={NotFound404} />
-            </Switch>
-          </Router>
-        </Provider>
-      </div>
+      <ErrorBoundary>
+        <div className="App">
+          <Provider store={store}>
+            <AuthProvider>
+              <Router>
+                <Switch>
+                  <Route exact path="/" component={LoginScreen} />
+                  <Route exact path="/dashboard" component={AdminDashboard} />
+                  <Route exact path="/dashboard/orders" component={OrdersComponent} />
+                  <Route exact path="/dashboard/shops" component={ShopsComponent} />
+                  <Route component={NotFound404} />
+                </Switch>
+              </Router>
+            </AuthProvider>
+          </Provider>
+        </div>
+      </ErrorBoundary>
     );
   }
 }

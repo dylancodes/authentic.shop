@@ -9,6 +9,7 @@ const refreshCred = () => {
     AWS.config.region = 'us-east-1';
     AWS.config.credentials.get((err) => {
       if(err) {
+        // log to service
         console.log(err);
         reject(err);
       } else {
@@ -19,13 +20,13 @@ const refreshCred = () => {
   });
 }
 
-const createRequest = async (requestMethod, requestPath, data = null) => {
+const createRequest = async (requestMethod, requestPath, data = null, contentType = 'application/json') => {
   this.data = data;
   return await refreshCred().then(() => {
     if(this.data != null) {
       this.request = {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': contentType
         },
         service: 'execute-api',
         hostname: 'api.authentic.shop',
@@ -36,7 +37,8 @@ const createRequest = async (requestMethod, requestPath, data = null) => {
         path: `/shops/${requestPath}`,
         body: JSON.stringify(this.data)
       }
-    } else {
+    }
+    else {
       this.request = {
         service: 'execute-api',
         hostname: 'api.authentic.shop',
@@ -56,6 +58,7 @@ const createRequest = async (requestMethod, requestPath, data = null) => {
     delete this.signedRequest.headers['Content-Length'];
     return this.signedRequest;
   }).catch((err) => {
+    // log to service
     console.log(err);
     return Promise.reject(err);
   });
@@ -70,6 +73,7 @@ export const getShopByName = async (shopAccount) => {
     return response;
   })
   .catch((err) => {
+    // log to service
     console.log(err);
   });
 }
@@ -83,6 +87,7 @@ export const getAllShops = async () => {
     return Promise.resolve(response);
   })
   .catch((err) => {
+    // log to service
     console.log(err);
   });
 }
@@ -96,6 +101,7 @@ export const createShop = async (data) => {
     return response;
   })
   .catch((err) => {
+    // log to service
     console.log(err);
   });
 }
@@ -114,6 +120,7 @@ export const editShop = async (shopAccount, data) => {
     return response;
   })
   .catch((err) => {
+    // log to service
     console.log(err);
   });
 }
@@ -127,11 +134,53 @@ export const deleteShop = async(shopAccount) => {
     if(!response.status) {
       console.log(response);
       Promise.reject(response.status);
-      return;
+      // return;
     }
     return response;
   })
   .catch((err) => {
+    // log to service
     console.log(err);
   });
 }
+
+
+export const uploadAttachment = async(shopAccount, fileObj) => {
+
+  return await createRequest('POST', `upload/${shopAccount}`, fileObj)
+  .then((signedRequest) => {
+    console.log(signedRequest);
+    return axios(signedRequest);
+  })
+  .then((response) => {
+    if(!response.status) {
+      console.log(response);
+      Promise.reject(response.status);
+      // return
+    }
+    return response;
+  })
+  .catch((err) => {
+    // log to service
+    console.log(err);
+  });
+}
+
+// else if(this.data != null && contentType !== 'application/json') {
+//   this.request = {
+//     headers: {
+//       'Content-Type': contentType
+//     },
+//     service: 'execute-api',
+//     hostname: 'api.authentic.shop',
+//     region: 'us-east-1',
+//     data: this.data,
+//     method: requestMethod,
+//     url: `https://api.authentic.shop/shops/${requestPath}`,
+//     path: `/shops/${requestPath}`,
+//     body: this.data
+//   }
+// }
+
+
+// 'multipart/form-data; boundary=AaB03x'

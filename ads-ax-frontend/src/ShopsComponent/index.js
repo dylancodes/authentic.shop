@@ -2,27 +2,42 @@ import React, { Component } from 'react';
 import AWS from 'aws-sdk';
 
 import { checkAuthFn } from '../utils/authUtility.js';
-import { getAllShops, createShop, editShop, deleteShop } from '../utils/api/shopsUtility.js';
+import { getAllShops, createShop, editShop, deleteShop, uploadAttachment } from '../utils/api/shopsUtility.js';
 
 import ShopPage from './ShopsComponent.js';
 import ErrorBoundary from '../_components/ErrorBoundary.js';
+
+import { AuthConsumer } from '../_contexts/authContext.js';
+
+export const ImageCollectionCtx = React.createContext();
+
+class ImageCollectionProvider extends Component {
+  render() {
+    const ctx_value = {
+      chooseFileFn: this.props.chooseFileFn
+    }
+    return (
+      <ImageCollectionCtx.Provider value={ctx_value}>
+        {this.props.children}
+      </ImageCollectionCtx.Provider>
+    )
+  }
+}
 
 class ShopsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: null
+      items: null,
+      s3ImageCollection: []
     }
     this.checkAuth();
-    this.getAll(); // add items to redux state, check if items is null, fire request
+    this.getAll();
   }
 
   checkAuth = () => {
     // try/catch
-    // const authStatus = this.props.isAuthenticated;
     const authStatus = checkAuthFn();
-    console.log("Shops Page");
-    console.log(authStatus);
     if(authStatus && AWS.config.credentials != null) {
       // do nothing
     } else {
@@ -33,7 +48,10 @@ class ShopsContainer extends Component {
   getAll = () => {
     if(this.state.items === null) {
       getAllShops().then((result) => {
-        this.setState({ items: result.data });
+        this.setState({
+          items: result.data,
+          s3ImageCollection: result.data.s3ImageCollection
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -69,6 +87,7 @@ class ShopsContainer extends Component {
   }
 
   changeShop = (shopAccount, params) => {
+    // what is the resolve/reject used for??
     return new Promise((resolve, reject) => {
       const data = {
         item: params.item,
@@ -105,12 +124,27 @@ class ShopsContainer extends Component {
     });
   }
 
+  chooseFileFn = async (fileObj, shopAccount) => {
+    uploadAttachment(shopAccount, fileObj)
+    .then((result) => {
+      // pass down result to appropriate component
+      console.log(result);
+    })
+    .catch((err) => {
+      // log to service
+      console.log("chooseFileFn errrrror");
+      console.log(err);
+    });
+  }
+
   render() {
     return (
       <ErrorBoundary>
-        <div className="adbc-body">
-          {this.state.items ? <ShopPage items={this.state.items} addShop={this.addShop} changeShop={this.changeShop} removeShop={this.removeShop} /> : <div><h1>Loading...</h1></div>}
-        </div>
+        <ImageCollectionProvider chooseFileFn={this.chooseFileFn}>
+          <div className="adbc-body">
+            {this.state.items ? <ShopPage items={this.state.items} addShop={this.addShop} changeShop={this.changeShop} removeShop={this.removeShop} /> : <div><h1>Loading...</h1></div>}
+          </div>
+        </ImageCollectionProvider>
       </ErrorBoundary>
     );
   }

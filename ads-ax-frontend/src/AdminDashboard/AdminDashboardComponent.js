@@ -10,7 +10,6 @@ import '../_styles/ADbC.css';
 class AdminDashboardComponent extends Component {
   constructor(props) {
     super(props);
-    // try/catch
     this.exitUser = this.exitUser.bind(this);
     if(AWS.config.credentials == null) {
       this.exitUser();
@@ -27,6 +26,7 @@ class AdminDashboardComponent extends Component {
       // log to service
       console.log(err);
       console.log('err logging out error');
+      throw new Error(err);
     }
   }
 

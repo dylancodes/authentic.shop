@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Header should match and pass the screenshot test 1`] = `
+<div
+  class="adbc--header__div"
+>
+  <a
+    href="/dashboard"
+  >
+    <h1>
+      Admin.Authentic.Shop
+    </h1>
+  </a>
+</div>
+`;

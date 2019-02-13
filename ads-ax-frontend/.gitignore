@@ -21,3 +21,8 @@ yarn-debug.log*
 yarn-error.log*
 
 aws-config.js
+
+# Currently not using redux so ignoring the folders and files
+/src/_actions
+/src/_reducers
+/src/_store.js

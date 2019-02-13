@@ -18,6 +18,7 @@ const Button = (props) => {
 Button.propTypes = {
   bgColor: PropTypes.string,
   color: PropTypes.string,
+  fontSize: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   padding: PropTypes.string,
   text: PropTypes.string.isRequired,

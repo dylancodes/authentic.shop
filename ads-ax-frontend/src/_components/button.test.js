@@ -6,7 +6,10 @@ import Screen from './Button.js';
 
 afterEach(cleanup);
 
-describe('', () => {
+// should we use snapshot testing here?
+// what are we testing for, correct rendering of props?
+
+describe('The Button Component', () => {
   describe('', () => {
     test('', () => {
       const callbackFn = jest.fn();

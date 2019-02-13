@@ -78,3 +78,29 @@
   font-size: 17px;
   font-family: Font Authentic;
   letter-spacing: 1px; }
+
+.addimage-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; }
+
+.input-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #103c57;
+  border-bottom: 1px solid #103c57;
+  padding: 3px;
+  display: inline-block; }
+
+.addimage-submit {
+  display: block;
+  text-align: center;
+  margin-top: 3px;
+  padding: 5px;
+  font-weight: 700;
+  color: black;
+  background-color: white;
+  border-bottom: 1px solid #d8d8d8; }

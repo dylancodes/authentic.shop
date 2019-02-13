@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-flexbox-grid';
 import PropTypes from 'prop-types';
 
+import ShopsImageCollection from './ShopsImageCollection';
 import ConfirmDeletionForm from '../_components/confirmDeletionForm.js';
 import Button from '../_components/Button.js';
 
@@ -10,6 +11,7 @@ class ShopItemComponent extends React.Component {
     super(props);
     const shopItem = this.props.item;
     this.state = {
+      s3ImageCollection: shopItem.s3ImageCollection,
       shopAccount: shopItem.shopAccount,
       displayName: shopItem.displayName,
       hq: shopItem.hq,
@@ -103,7 +105,7 @@ class ShopItemComponent extends React.Component {
           </Row>
           <Row>
             <Col xs={6} sm={6} md={3} lg={3} className="col-element">
-              <h5>Attachments <Button onClick={() => this._click("attachmentsState")} className={'edit-item'} text={'Edit'} /></h5>
+            {this.state.s3ImageCollection ? <ShopsImageCollection s3ImageCollection={this.state.s3ImageCollection} shopAccount={this.state.shopAccount}/> : <ShopsImageCollection shopAccount={this.state.shopAccount}/>}
             </Col>
             <Col xs={6} sm={6} md={3} lg={3} className="col-element">
               <h5>Title <Button onClick={() => this._click("titleState")} className={'edit-item'} text={'Edit'} /></h5>

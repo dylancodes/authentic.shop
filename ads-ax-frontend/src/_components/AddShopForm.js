@@ -15,7 +15,6 @@ class AddShopForm extends Component {
       contactEmail: "",
       contactTitle: "",
       contactPhone: "",
-      attachments: [],
       hasError: false,
       errorMessage: ''
     }
@@ -38,15 +37,13 @@ class AddShopForm extends Component {
           name: this.state.contactName,
           phone: this.state.contactPhone,
           title: this.state.contactTitle
-        },
-        attachments: this.state.attachments
+        }
       }
       this.props.addShop(shopParams);
       this.props.showForm();
     }
     catch(err) {
-      // log unsuccessful add
-      // show unsuccessful add message
+      // log to service
       if(!err.type === 'test') {
         console.log(err);
       }
@@ -72,7 +69,6 @@ class AddShopForm extends Component {
               <input className="input-element-shops" type="text" id="contactEmail" name="contactEmail" placeholder="Contact Email" value={this.state.contactEmail} onChange={this.handleChange} required/>
               <input className="input-element-shops" type="text" id="contactTitle" name="contactTitle" placeholder="Contact Title" value={this.state.contactTitle} onChange={this.handleChange} required/>
               <input className="input-element-shops" type="text" id="contactPhone" name="contactPhone" placeholder="Contact Phone" value={this.state.contactPhone} onChange={this.handleChange} required/>
-              <input className="input-element-shops" type="text" id="attachments" name="attachments" placeholder="Attachments" value={this.state.attachments} onChange={this.handleChange} />
               <input className="input-submit-shops" type="submit" name="submit" data-testid="addbtn" value="Create Shop"/>
               {this.state.hasError ? <h4 data-testid="error-message">{this.state.errorMessage}</h4> : <React.Fragment />}
             </div>

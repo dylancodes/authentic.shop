@@ -12,6 +12,7 @@ this.internals.poolData = {
 
 this.internals.userPool = new CognitoUserPool(this.internals.poolData);
 
+/* */
 export const authFn = (username, password) => {
   return new Promise((resolve, reject) => {
     const userData = {
@@ -19,7 +20,7 @@ export const authFn = (username, password) => {
       Pool: this.internals.userPool
     }
 
-    const tempUser = new CognitoUser(userData);
+    const userInstance = new CognitoUser(userData);
 
     const authenticationData = {
         Username : username,
@@ -27,9 +28,9 @@ export const authFn = (username, password) => {
     }
     const authenticationDetails = new AuthenticationDetails(authenticationData);
 
-    tempUser.authenticateUser(authenticationDetails, {
+    userInstance.authenticateUser(authenticationDetails, {
       onSuccess: (user) => {
-        this.internals.cognitoUser = user;
+        this.internals.authenticatedUserInstance = user;
         AWS.config.update({ region: AWSConfig.cognito.REGION });
         // Configure the credentials provider to use your identity pool
         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
@@ -38,48 +39,39 @@ export const authFn = (username, password) => {
                 'cognito-idp.us-east-1.amazonaws.com/us-east-1_C0HNsNxHX': user.idToken.jwtToken
             }
         });
-        const returnObj = {
-          NEW_PASSWORD_REQUIRED: null,
-          COGNITO_USER: user
-        }
-        resolve(returnObj);
+        resolve({ NEW_PASSWORD_REQUIRED: false });
       },
       onFailure: (err) => {
         const errorMsg = err.message + ' Please try again to continue.';
         reject(errorMsg);
      },
       newPasswordRequired: (userAttributes) => {
-         delete userAttributes.email_verified;
-         delete userAttributes.phone_number_verified;
-         userAttributes.name = authenticationDetails.username;
-         this.internals.userAttr = userAttributes;
-         this.internals.cognitoUser = tempUser;
-         const returnObj = {
-           NEW_PASSWORD_REQUIRED: true,
-           COGNITO_USER: null
-         }
-         resolve(returnObj);
+        delete userAttributes.email_verified;
+        delete userAttributes.phone_number_verified;
+        userAttributes.name = authenticationDetails.username;
+        this.internals.userAttr = userAttributes;
+        this.internals.authenticatedUserInstance = userInstance;
+        resolve({ NEW_PASSWORD_REQUIRED: true });
       }
-    });
-  });
+    })
+  })
 }
 
+/* */
 export const newPasswordFn = (newPassword) => {
   return new Promise((resolve, reject) => {
     const userAttr = this.internals.userAttr;
-    this.internals.cognitoUser.completeNewPasswordChallenge(newPassword, userAttr, {
+    this.internals.authenticatedUserInstance.completeNewPasswordChallenge(newPassword, userAttr, {
       onSuccess: (user) => {
-        const returnObj = {
-          COGNITO_USER: user
-        }
-        resolve(returnObj);
+        resolve({status: true });
       },
       onFailure: (err) => {
         const errorMsg = err.message + ' Please try again to continue.';
         reject(errorMsg);
       }
     });
-  });
+  })
+
 }
 
 export const userFn = () => {
@@ -88,19 +80,23 @@ export const userFn = () => {
 
 export const signOutFn = () => {
   const user = this.internals.userPool.getCurrentUser();
-  user.signOut();
-  this.internals.cognitoUser = null;
+  if(user) {
+    user.signOut();
+  }
+  this.internals.authenticatedUserInstance = null;
+  this.internals.userAttr = null;
 }
 
 export const checkAuthFn = () => {
+  /* checks if a user's session is valid */
   const user = this.internals.userPool.getCurrentUser();
   if(user != null) {
     return user.getSession((err, session) => {
       if(err) {
-        // log error
+        // log to service
         return false;
       }
-      // log session validity + session.isValid()
+      // log to service: session validity + session.isValid()
       return true;
     });
   }

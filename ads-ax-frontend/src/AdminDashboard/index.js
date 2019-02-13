@@ -6,6 +6,9 @@ import { authenticateUserAction, logoutUserAction } from '../_actions/CurrentUse
 import { checkAuthFn } from '../utils/authUtility.js';
 
 import ADbC from './AdminDashboardComponent.js';
+import ErrorBoundary from '../_components/ErrorBoundary.js';
+
+import { AuthConsumer } from '../_contexts/authContext.js';
 
 class AdminDashboardIndex extends Component {
   constructor(props) {
@@ -17,21 +20,28 @@ class AdminDashboardIndex extends Component {
     // try/catch
     // const authStatus = this.props.isAuthenticated;
     // we can set it up to check against session status and auth status ... session status would be aws credentials and auth status would be redux state???
-    const authStatus = checkAuthFn();
-    console.log("Admin Dashboard");
-    console.log(authStatus);
-    if(authStatus) {
-      // do nothing
-    } else {
-      this.props.history.push('/');
+    try {
+      const authStatus = checkAuthFn();
+      console.log("Admin Dashboard");
+      console.log(authStatus);
+      if(!authStatus) {
+        this.props.history.push('/');
+      }
+    }
+    catch(err) {
+      // log to service
+      console.log(err);
+      throw new Error(err);
     }
   }
 
   render() {
     return (
-      <div className="adbc-body">
-        <ADbC history={this.props.history} logoutUser={this.props.logoutUser}/>
-      </div>
+      <ErrorBoundary>
+        <div className="adbc-body">
+          <ADbC history={this.props.history} logoutUser={this.props.logoutUser}/>
+        </div>
+      </ErrorBoundary>
     );
   }
 }

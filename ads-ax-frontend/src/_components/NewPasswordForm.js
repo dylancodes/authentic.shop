@@ -34,9 +34,10 @@ class NewPasswordForm extends Component {
         this.props.updatePassword(this.state.pw1);
       }
       catch(err) {
+        // log to service
         console.log(err);
         console.log('error in new password form');
-        // log to service
+        throw new Error(err);
       }
     }
   }

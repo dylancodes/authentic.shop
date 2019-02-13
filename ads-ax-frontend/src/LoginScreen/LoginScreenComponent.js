@@ -27,7 +27,15 @@ class LoginScreenComponent extends Component {
     event.preventDefault();
     if(this.state.username.length > 0 && this.state.password.length > 0) {
       // try/catch
-      this.props.onFormSubmission(this.state.username, this.state.password);
+      try {
+        this.props.onFormSubmission(this.state.username, this.state.password);
+      }
+      catch(err) {
+        // log to service
+        console.log(err);
+        this.setState({ errMsg: err });
+      }
+
     }
     else {
       this.setState({ errMsg: "Please fill in all fields to continue" });

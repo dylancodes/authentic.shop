@@ -14,6 +14,7 @@ class confirmDeletionForm extends Component {
       // log to service
       console.log(err);
       console.log("error in confirm deletion");
+      throw new Error(err);
     }
   }
 
@@ -25,6 +26,7 @@ class confirmDeletionForm extends Component {
       // log to service
       console.log(err);
       console.log("error in confirm deletion");
+      throw new Error(err);
     }
   }
 

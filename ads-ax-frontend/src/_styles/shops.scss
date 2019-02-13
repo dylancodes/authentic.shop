@@ -136,3 +136,32 @@ $screen-xl-min: 1200px;
   font-family: Font Authentic;
   letter-spacing: 1px;
 }
+
+.addimage-input {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.input-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgb(16, 60, 87);
+    border-bottom: 1px solid rgb(16, 60, 87);
+    padding: 3px;
+    display: inline-block;
+}
+
+.addimage-submit {
+  display: block;
+  text-align: center;
+  margin-top: 3px;
+  padding: 5px;
+  font-weight: $bold-size;
+  color: black;
+  background-color: white;
+  border-bottom: 1px solid rgb(216, 216, 216);
+}

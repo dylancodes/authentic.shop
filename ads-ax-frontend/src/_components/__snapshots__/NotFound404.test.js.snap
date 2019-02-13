@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The NotFound404 Component should match and pass the screenshot test 1`] = `
+<div
+  styles="[object Object]"
+>
+  <h3>
+    Sorry, page not found!
+  </h3>
+</div>
+`;
