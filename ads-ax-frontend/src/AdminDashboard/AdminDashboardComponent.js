@@ -8,13 +8,6 @@ import { signOutFn } from '../utils/authUtility.js';
 import '../_styles/ADbC.css';
 
 class AdminDashboardComponent extends Component {
-  constructor(props) {
-    super(props);
-    if(AWS.config.credentials == null) {
-      this.exitUser();
-    }
-  }
-
   exitUser = async () => {
     try {
       await signOutFn();

@@ -13,7 +13,6 @@ class AdminDashboardIndex extends Component {
   }
 
   checkAuth = () => {
-    console.log(this.props.authCtx.isAuthenticated);
     if(!this.props.authCtx.isAuthenticated) {
       this.props.history.push('/');
     }

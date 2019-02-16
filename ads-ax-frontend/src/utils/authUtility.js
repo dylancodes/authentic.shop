@@ -79,7 +79,6 @@ export const newPasswordFn = (newPassword) => {
       }
     });
   })
-
 }
 
 export const userFn = () => {
@@ -90,6 +89,7 @@ export const signOutFn = () => {
   const user = this.internals.userPool.getCurrentUser();
   if(user) {
     user.signOut();
+    AWS.config.credentials.clearCachedId();
   }
   this.internals.authenticatedUserInstance = null;
   this.internals.userAttr = null;

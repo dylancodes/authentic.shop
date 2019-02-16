@@ -15,11 +15,12 @@ class LoginScreenIndex extends Component {
     this.state = {
       errMsg: null
     }
+    this.checkAuth();
     this.onFormSubmission = this.onFormSubmission.bind(this);
     this.updatePassword = this.updatePassword.bind(this);
   }
 
-  checkAuth() {
+  checkAuth = () => {
     if(this.props.authCtx.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
@@ -33,7 +34,9 @@ class LoginScreenIndex extends Component {
          this.props.authCtx.toggleFirstLogin();
       }
       else {
-        this.props.authCtx.toggleAuth();
+        if(!this.props.authCtx.isAuthenticated) {
+          this.props.authCtx.toggleAuth();
+        }
         this.props.history.push('/dashboard');
       }
     }
